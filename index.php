@@ -5,8 +5,8 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- SEMANTIC UI -->
-	<link rel="stylesheet" type="text/css" href="semantic-ui/dist/semantic.min.css">
-	<script src="semantic-ui/dist/semantic.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="Semantic-UI/dist/semantic.min.css">
+	<script src="Semantic-UI/dist/semantic.min.js"></script>
 
 </head>
 <body>
