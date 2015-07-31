@@ -73,39 +73,18 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>
-							<h4 class="ui header">
-								<a class="ui red circular label">A</a>
-								<div class="content">
-									Ana <small>Maria</small>
-								</div>
-							</h4>
-						</td>
-						<td>Pão</td>
-					</tr>
-					<tr>
-						<td>
-							<h4 class="ui header">
-								<a class="ui green circular label">J</a>
-								<div class="content">
-									João <small>Paulo</small>
-								</div>
-							</h4>
-						</td>
-						<td>Presunto</td>
-					</tr>
-					<tr>
-						<td>
-							<h4 class="ui header">
-								<a class="ui blue circular label">M</a>
-								<div class="content">
-									Marcelo <small>Augusto</small>
-								</div>
-							</h4>
-						</td>
-						<td>Queijo</td>
-					</tr>
+				<?php 
+
+					include 'action.class.php';
+
+					$action = new Action;
+					$list = $action->loadList();
+
+					foreach ($list as $value) {
+						$action->listHtml( $value );
+					}
+
+				?>
 			  </tbody>
 			</table>
 		</div>
