@@ -41,7 +41,7 @@ class Action
 						<h4 class='ui header'>
 							<a class='ui {$this->arrayColor[$color]} circular label'>{$obj->Letra}</a>
 							<div class='content'>
-								{$obj->Nome}
+								{$obj->Nome} <small>{$obj->Sobrenome}</small>
 							</div>
 						</h4>
 					</td>
@@ -68,6 +68,12 @@ class Action
 
 	private function FirstLetter( $obj ) {
 		foreach ($obj as $key => $value) {
+			$sobrenome = '';
+			$nome = explode(' ', $value->Nome);
+			for($i = 1;$i <= count($nome)-1; $i++ )
+				$sobrenome .= $nome[$i].' ';
+			$obj[$key]->Sobrenome = $sobrenome;
+			$obj[$key]->Nome = $nome[0];
 			$obj[$key]->Letra = substr($value->Nome,0,1);
 		}
 		return $obj;
