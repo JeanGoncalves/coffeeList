@@ -3,7 +3,7 @@
 <head>
 	<title>Coffee List | AgênciaSys</title>
 	<meta charset="utf-8">
-
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- SEMANTIC UI -->
 	<link rel="stylesheet" type="text/css" href="semantic-ui/dist/semantic.min.css">
 	<script src="semantic-ui/dist/semantic.min.js"></script>
@@ -24,9 +24,9 @@
 			</div>
 		</div>
 	  <a class="item active">Início</a>
-	  <a class="item">Lista</a>
-	  <a class="item">Ítem</a>
-	  <a class="item">Histórico</a>
+	  <a href="list.php" class="item">Lista</a>
+	  <a href="item.php" class="item">Ítem</a>
+	  <a href="history.php" class="item">Histórico</a>
 	</div>
 
 	<div class="ui container">
@@ -49,11 +49,14 @@
 					<div class="field">
 						<label>Ítem</label>
 						<select class="ui dropdown" name="item">
-							<option value="">Selecione</option>
-							<option value="1">Pão</option>
-							<option value="2">Café</option>
-							<option value="3">Presunto</option>
-							<option value="4">Queijo</option>
+						<?php 
+
+							include "item.class.php";
+
+							$itens = new Item;
+							$itens->listSelect();
+
+						?>
 						</select>
 					</div>
 				</div>
