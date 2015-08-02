@@ -1,0 +1,21 @@
+{
+    "name": "root/coffee-list",
+    "description": "Softers Friday's coffee",
+    "require": {
+        "piano/mvc": "1.1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    },
+    "authors": [
+        {
+            "name": "Diogo Alexsander Cavilha",
+            "email": "diogocavilha@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "application": "src/"
+        }
+    }
+}
