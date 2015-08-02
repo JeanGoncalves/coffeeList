@@ -1,11 +1,16 @@
 # coffeeList
-List to coffee of friday in my work company
 
-Functionalities:
+### Virtual Host
 
-1. Framework
-    - [Semantic-UI](http://www.semantic-ui.com/)
-2. Database
-    - [MongoDB](https://www.mongodb.org/)
-3. Others
-    - [Composer](https://getcomposer.org/) 
+Listen 8081
+<VirtualHost *:8081>
+    DocumentRoot /www/coffeeList/public
+    #ServerName coffeelist.conf.local
+    SetEnv APPLICATION_ENV  "development"
+    <Directory /www/coffeeList/public/>
+        Options Indexes FollowSymLinks MultiViews
+        AllowOverride All
+        Order allow,deny
+        allow from all
+    </Directory>
+</VirtualHost>
