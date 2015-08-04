@@ -1,0 +1,20 @@
+{
+  "name": "coffeeList",
+  "version": "0.0.0",
+  "homepage": "https://github.com/JeanGoncalves/coffeeList",
+  "authors": [
+    "Diogo Alexsander Cavilha <diogocavilha@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/assets/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+	"semantic-ui": "2.0.7"
+  }
+}
