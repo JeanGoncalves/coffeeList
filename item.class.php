@@ -14,8 +14,8 @@ class Item
 	public function listSelect() {
         $itens = self::loadItens();
 		echo "<option>Selecione</option>";
-		foreach ($itens as $key => $value) {
-			echo "<option value='{$key}'>{$value->Item}</option>";
+		foreach ($itens as $value) {
+			echo "<option value='{$value->Item}'>{$value->Item}</option>";
 		}
 	}
 }

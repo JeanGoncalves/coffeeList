@@ -51,14 +51,14 @@
                 <tbody>
                 <?php 
 
-                    // include 'action.class.php';
+                    include 'action.class.php';
 
-                    // $action = new Action;
-                    // $list = $action->loadList();
+                    $action = new Action;
+                    $list = $action->loadList();
 
-                    // foreach ($list as $value) {
-                    //     $action->listHtml( $value );
-                    // }
+                    foreach ($list as $value) {
+                        $action->listHtml( $value );
+                    }
 
                 ?>
               </tbody>

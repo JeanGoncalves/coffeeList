@@ -39,7 +39,7 @@
 				<p>Marque abaixo seu nome e o que vai trazer para o café. <i class="thumbs outline up icon"></i></p>
 			</div>
 		</div>
-		<form class="ui form attached fluid segment" method="get">
+		<form class="ui form attached fluid segment" method="POST" action="action.list.php">
 			<div class="field">
 				<div class="two fields">
 					<div class="field">
