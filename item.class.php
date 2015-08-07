@@ -7,7 +7,7 @@ class Item
 	public function loadItens() {
 		$list = fopen( $this->arq,'r' ) or die( "Itens não encontrada." );
 		$read = fread( $list, filesize( $this->arq ) );
-		$read = json_decode( $read );
+		$read = json_decode( $read, 1 );
 		return $read;
 	}
 
@@ -18,6 +18,12 @@ class Item
 			echo "<option value='{$value->Item}'>{$value->Item}</option>";
 		}
 	}
+
+    public function varDump( $obj ) {
+        echo '<div class="ui red message">';
+        echo '<pre>'.print_r($obj,1).'</pre>';
+        echo '</div>';
+    }
 }
 
 ?>

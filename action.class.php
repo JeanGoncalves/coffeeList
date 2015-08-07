@@ -10,11 +10,14 @@ class Action
 		$this->dateNow = date('Y-m-d');
 	}
 
-	public function loadList() {
-		$list = fopen( $this->list,'r' ) or die( "Lista não encontrada." );
+	public function loadList( $vKey ) {
+		$list = fopen( $this->list,'r' ) or die( "Lista não encontrada ao Carregar Lista." );
 		$read = fread( $list, filesize( $this->list ) );
 		$read = json_decode( $read,1 );
-		$key = self::nextList( $read );
+		if( isset( $vKey ) )
+			$key = $vKey;
+		else
+			$key = self::nextList( $read, $key );
 		if( $read == -1 )
 			echo '<tr><td>Não tem lista futura.</td></tr>';
 		$read = self::FirstLetter( $read[$key][lista] );
@@ -27,10 +30,32 @@ class Action
 	}
 
 	public function readList( $date ) {
-		$list = fopen( $this->list,'r' ) or die( "Lista não encontrada." );
+		$list = fopen( $this->list,'r' ) or die( "Lista não encontrada ao Ler Lista." );
 		$read = fread( $list, filesize( $this->list ) );
 		$read = json_decode($read,1);
 		return $read;
+	}
+
+	public function getLists() {
+		$response = Array();
+		$lists = self::readList();
+		foreach ($lists as $key => $value) {
+			$obj = Array('key'=> $key,'data'=>$value[Data], 'qtd'=>count($value[lista]));
+			array_push($response, $obj);
+		}
+		return $response;
+	}
+
+	public function getDate( $vKey ) {
+		$list = fopen( $this->list,'r' ) or die( "Lista não encontrada ao Carregar Lista." );
+		$read = fread( $list, filesize( $this->list ) );
+		$read = json_decode( $read,1 );
+		if( isset( $vKey ) )
+			$key = $vKey;
+		else
+			$key = self::nextList( $read, $key );
+		return $read[$key][Data];
+
 	}
 
 	public function editList( $obj ) {
@@ -39,7 +64,7 @@ class Action
 		$cont = count($lista[$key][lista]);
 		array_push($lista[$key][lista],$obj);
 		$lista = json_encode($lista,JSON_UNESCAPED_SLASHES);
-		$list = fopen( $this->list,'w' ) or die( "Lista não encontrada." );
+		$list = fopen( $this->list,'w' ) or die( "Lista não encontrada ao Editar Lista." );
 		fwrite($list, $lista);
 		fclose($list);
 		header("location:index.php");
@@ -60,7 +85,7 @@ class Action
 				</tr>";
 	}
 
-	private function nextList( $obj ) {
+	private function nextList( $obj, $vKey ) {
 		foreach ($obj as $key => $list) {
 			$data = explode('/',$list[Data]);
 			$data = $data[2].'-'.$data[1].'-'.$data[0];
@@ -89,16 +114,6 @@ class Action
 		}
 		return $obj;
 	}
-
-
-	//////////////// HELPER ////////////////			
-
-	private function varDump( $obj ) {
-		echo '<div class="ui red message">';
-		echo '<pre>'.print_r($obj,1).'</pre>';
-		echo '</div>';
-	}
-
 }
 
 ?>

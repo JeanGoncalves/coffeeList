@@ -1,3 +1,13 @@
+<?php  
+	include 'action.class.php';
+
+	$key = null;
+	if( isset($_GET['key']) )
+		$key = $_GET['key'];
+
+	$action = new Action;
+	$date = $action->getDate( $key );
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,7 +44,7 @@
 			<i class="file text outline icon"></i>
 			<div class="content">
 				<div class="header">
-					Já marcou na lista o que vai trazer para o café de sexta-feira (31/07)?
+					Já marcou na lista o que vai trazer para o café do dia <?= $date ?>?
 				</div>
 				<p>Marque abaixo seu nome e o que vai trazer para o café. <i class="thumbs outline up icon"></i></p>
 			</div>
@@ -78,11 +88,7 @@
 				<tbody>
 				<?php 
 
-					include 'action.class.php';
-
-					$action = new Action;
-					$list = $action->loadList();
-
+					$list = $action->loadList( $key );
 					foreach ($list as $value) {
 						$action->listHtml( $value );
 					}

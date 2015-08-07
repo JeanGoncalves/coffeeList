@@ -34,9 +34,9 @@
             <i class="file text outline icon"></i>
             <div class="content">
                 <div class="header">
-                    Lista
+                    Itens
                 </div>
-                <p>Listas de café</p>
+                <p>Listas dos Itens disponíveis</p>
             </div>
         </div>
         <form class="ui form attached fluid segment" method="get">
@@ -44,7 +44,7 @@
                 <div class="two fields">
                     <div class="field">
                         <label>Item</label>
-                        <input name="nome" placeholder="Insira seu nome" type="text">
+                        <input name="nome" placeholder="Insira o Item" type="text">
                     </div>
                 </div>
             </div>
@@ -58,17 +58,20 @@
             <table class="ui blue striped table">
                 <thead>
                     <tr>
-                        <th class="six wide">Nome</th>
                         <th class="ten wide">Ítem</th>
                     </tr>
                 </thead>
                 <tbody>
                 <?php 
 
-                    // include 'action.class.php';
+                    include "item.class.php";
 
-                    // $action = new Action;
-                    // $list = $action->loadList();
+                    $itens = new Item;
+                    $item = $itens->loadItens();
+
+                    foreach ($item as $value) {
+                        echo "<tr><td>{$value[Item]}</td></tr>";
+                    }
 
                     // foreach ($list as $value) {
                     //     $action->listHtml( $value );

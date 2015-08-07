@@ -41,11 +41,11 @@
         </div>
 
         <div class="ui message">
-            <table class="ui blue striped table">
+            <table class="ui blue selectable striped table">
                 <thead>
                     <tr>
-                        <th class="six wide">Nome</th>
-                        <th class="ten wide">Ítem</th>
+                        <th class="six wide">Data</th>
+                        <th class="ten wide">Quantidade de pessoas que preencheram a lista</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -54,10 +54,21 @@
                     include 'action.class.php';
 
                     $action = new Action;
-                    $list = $action->loadList();
+                    $list = $action->getLists();
 
                     foreach ($list as $value) {
-                        $action->listHtml( $value );
+                        echo "<tr><td><a href='index.php?key=$value[key]'>$value[data]</a></td><td><a href='index.php?key=$value[key]'>$value[qtd]</a></td></tr>";
+                        // echo "  <tr>
+                        //             <td>
+                        //                 <h4 class='ui header'>
+                        //                     <a class='ui {$this->arrayColor[$color]} circular label'>{$value[key]}</a>
+                        //                     <div class='content'>
+                        //                         {$value[data]}
+                        //                     </div>
+                        //                 </h4>
+                        //             </td>
+                        //             <td>{$value[qtd]}</td>
+                        //         </tr>";
                     }
 
                 ?>
