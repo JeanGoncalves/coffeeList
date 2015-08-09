@@ -85,6 +85,7 @@
 				    <tr>
 				    	<th class="six wide">Nome</th>
 				    	<th class="ten wide">Ítem</th>
+				    	<th class="two wide"></th>
 					</tr>
 				</thead>
 				<tbody>

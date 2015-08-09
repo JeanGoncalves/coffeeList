@@ -81,6 +81,11 @@ class Action extends Helper
 						</h4>
 					</td>
 					<td>{$obj[Item]}</td>
+					<td>
+						<button class=\"ui red icon button\">
+                            <i class=\"trash icon\"></i>
+                        </button>
+					</td>
 				</tr>";
 	}
 

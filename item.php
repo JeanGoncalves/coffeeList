@@ -58,7 +58,8 @@
             <table class="ui blue striped table">
                 <thead>
                     <tr>
-                        <th class="ten wide">Ítem</th>
+                        <th class="sixteen wide">Ítem</th>
+                        <th class="two wide"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -70,7 +71,14 @@
                     $item = $itens->loadItens();
 
                     foreach ($item as $value) {
-                        echo "<tr><td>{$value[Item]}</td></tr>";
+                        echo "  <tr>
+                                    <td>{$value[Item]}</td>
+                                    <td>
+                                        <button class=\"ui red icon button\">
+                                            <i class=\"trash icon\"></i>
+                                        </button>
+                                    </td>
+                                </tr>";
                     }
 
                     // foreach ($list as $value) {

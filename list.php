@@ -59,6 +59,7 @@
                     <tr>
                         <th class="six wide">Data</th>
                         <th class="ten wide">Quantidade de pessoas que preencheram a lista</th>
+                        <th class="two wide"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -69,8 +70,20 @@
                     $action = new Action;
                     $list = $action->getLists();
 
-                    foreach ($list as $value) {
-                        echo "<tr><td><a href='index.php?key=$value[key]'>$value[data]</a></td><td><a href='index.php?key=$value[key]'>$value[qtd]</a></td></tr>";
+                    foreach ($list as $key => $value) {
+                        echo "  <tr>
+                                    <td>
+                                        <a href='index.php?key=$value[key]'>$value[data]</a>
+                                    </td>
+                                    <td>
+                                        <a href='index.php?key=$value[key]'>$value[qtd]</a>
+                                    </td>
+                                    <td>
+                                        <button class=\"ui red icon button\">
+                                            <i class=\"trash icon\"></i>
+                                        </button>
+                                    </td>
+                                </tr>";
                     }
 
                 ?>
