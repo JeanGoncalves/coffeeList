@@ -7,10 +7,10 @@
     <!-- SEMANTIC UI -->
     <link rel="stylesheet" type="text/css" href="Semantic-UI/dist/semantic.min.css">
     <script src="Semantic-UI/dist/semantic.min.js"></script>
-
+    <script type="text/javascript" src="maskedinput/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="maskedinput/jquery.maskedinput.min.js"></script>
 </head>
 <body>
-    
     <div class="ui secondary pointing menu">
         <div class="item">
             <div class="ui relaxed divided list">
@@ -39,6 +39,19 @@
                 <p>Listas de café</p>
             </div>
         </div>
+        <form class="ui form attached fluid segment" method="POST" action="action.list.php">
+            <input type="hidden" name="tipo" value="lista">
+            <div class="field">
+                <div class="field">
+                    <label>Data</label>
+                    <input name="data" id="data" type="text">
+                </div>
+            </div>
+            <button class="ui blue labeled icon button" tabindex="0">
+                <i class="checkmark box icon"></i>
+                Criar Lista
+            </button>
+        </form>
 
         <div class="ui message">
             <table class="ui blue selectable striped table">
@@ -58,17 +71,6 @@
 
                     foreach ($list as $value) {
                         echo "<tr><td><a href='index.php?key=$value[key]'>$value[data]</a></td><td><a href='index.php?key=$value[key]'>$value[qtd]</a></td></tr>";
-                        // echo "  <tr>
-                        //             <td>
-                        //                 <h4 class='ui header'>
-                        //                     <a class='ui {$this->arrayColor[$color]} circular label'>{$value[key]}</a>
-                        //                     <div class='content'>
-                        //                         {$value[data]}
-                        //                     </div>
-                        //                 </h4>
-                        //             </td>
-                        //             <td>{$value[qtd]}</td>
-                        //         </tr>";
                     }
 
                 ?>
@@ -76,6 +78,11 @@
             </table>
         </div>
     </div>
+    <script type="text/javascript">
+    $(function(){
+        $('#data').mask("99/99/9999",{placeholder:"DD/MM/AAAA"});
+    });
+    </script>
 
 </body>
 </html>

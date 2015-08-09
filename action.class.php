@@ -1,6 +1,8 @@
 <?php 
 
-class Action
+require_once 'helper.class.php';
+
+class Action extends Helper
 {		
 	private $list = 'archives/arquivo.list';
 	private $dateNow;
@@ -11,9 +13,7 @@ class Action
 	}
 
 	public function loadList( $vKey ) {
-		$list = fopen( $this->list,'r' ) or die( "Lista não encontrada ao Carregar Lista." );
-		$read = fread( $list, filesize( $this->list ) );
-		$read = json_decode( $read,1 );
+		$read = parent::ManipulateArchive($this->list,'r');
 		if( isset( $vKey ) )
 			$key = $vKey;
 		else
@@ -26,19 +26,20 @@ class Action
 	}
 
 	public function createList( $date ) {
+		$lista = parent::ManipulateArchive($this->list, 'r');
+		$key = count($lista);
+		$obj = Array('Data'=>$date, 'lista'=> Array());
+		array_push( $lista, $obj );
+		parent::varDump($lista);
+		$lista = json_encode($lista,JSON_UNESCAPED_SLASHES);
+		$lista = parent::ManipulateArchive($this->list, 'w', $lista);
+		header("location:index.php?key=".$key);
 
-	}
-
-	public function readList( $date ) {
-		$list = fopen( $this->list,'r' ) or die( "Lista não encontrada ao Ler Lista." );
-		$read = fread( $list, filesize( $this->list ) );
-		$read = json_decode($read,1);
-		return $read;
 	}
 
 	public function getLists() {
 		$response = Array();
-		$lists = self::readList();
+		$lists = parent::ManipulateArchive($this->list,'r');
 		foreach ($lists as $key => $value) {
 			$obj = Array('key'=> $key,'data'=>$value[Data], 'qtd'=>count($value[lista]));
 			array_push($response, $obj);
@@ -47,27 +48,25 @@ class Action
 	}
 
 	public function getDate( $vKey ) {
-		$list = fopen( $this->list,'r' ) or die( "Lista não encontrada ao Carregar Lista." );
-		$read = fread( $list, filesize( $this->list ) );
-		$read = json_decode( $read,1 );
+		$read = parent::ManipulateArchive($this->list,'r');
 		if( isset( $vKey ) )
 			$key = $vKey;
 		else
 			$key = self::nextList( $read, $key );
 		return $read[$key][Data];
-
 	}
 
-	public function editList( $obj ) {
-		$lista = self::readList();
-		$key = self::nextList( $lista );
+	public function editList( $vKey, $obj ) {
+		$lista = parent::ManipulateArchive($this->list,'r');
+		if( isset( $vKey ) )
+			$key = $vKey;
+		else
+			$key = self::nextList( $read, $key );
 		$cont = count($lista[$key][lista]);
 		array_push($lista[$key][lista],$obj);
 		$lista = json_encode($lista,JSON_UNESCAPED_SLASHES);
-		$list = fopen( $this->list,'w' ) or die( "Lista não encontrada ao Editar Lista." );
-		fwrite($list, $lista);
-		fclose($list);
-		header("location:index.php");
+		$lista = parent::ManipulateArchive($this->list, 'w', $lista);
+		header("location:index.php?key=".$key);
 	}
 
 	public function listHtml( $obj ) {

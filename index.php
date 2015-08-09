@@ -50,6 +50,8 @@
 			</div>
 		</div>
 		<form class="ui form attached fluid segment" method="POST" action="action.list.php">
+            <input type="hidden" name="tipo" value="home">
+            <input type="hidden" name="key" value="<?= $key ?>">
 			<div class="field">
 				<div class="two fields">
 					<div class="field">
@@ -65,7 +67,7 @@
 
 							$itens = new Item;
 							$itens->listSelect();
-
+							
 						?>
 						</select>
 					</div>
