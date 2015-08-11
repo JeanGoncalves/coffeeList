@@ -9,6 +9,7 @@ class Helper
         echo '<div class="ui red message">';
         echo '<pre>'.print_r($obj,1).'</pre>';
         echo '</div>';
+        die('<hr>Finish Vardump');
     }
 
     public function ManipulateArchive( $archive, $type, $string = null ) {

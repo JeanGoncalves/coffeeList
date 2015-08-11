@@ -7,8 +7,8 @@ class Item extends Helper
 	private $arq = 'archives/itens.list';
 
 	public function loadItens() {
-		$read = parent::ManipulateArchive($this->arq, 'r');
-		return $read;
+		$itens = parent::ManipulateArchive($this->arq, 'r');
+		return $itens;
 	}
 
 	public function listSelect() {
@@ -17,6 +17,30 @@ class Item extends Helper
 		foreach ($itens as $value) {
 			echo "<option value='{$value[Item]}'>{$value[Item]}</option>";
 		}
+	}
+
+	public function addItem( $nome ) {
+		$itens = parent::ManipulateArchive($this->arq, 'r');
+		array_push($itens, Array('Item'=>$nome));
+		$itens = json_encode($itens,JSON_UNESCAPED_SLASHES);
+		parent::ManipulateArchive($this->arq, 'w', $itens);
+		header('location:item.php');
+	}
+
+	public function deleteItem( $vKey ) {
+		$itens = parent::ManipulateArchive($this->arq, 'r');
+		unset($itens[$vKey]);
+		$i = 0;
+		foreach($itens as $key => $value) {
+			if( $key > $i ) {
+				$itens[$i] = $value;
+				unset($itens[$key]);
+			}
+			$i++;
+		}
+		$itens = json_encode($itens,JSON_UNESCAPED_SLASHES);
+		parent::ManipulateArchive($this->arq, 'w', $itens);
+		header('location:item.php');
 	}
 }
 

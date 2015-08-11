@@ -1,12 +1,1 @@
-[
-    {"Item": "300g de Queijo"},
-    {"Item": "300g de Presunto"},
-    {"Item": "1 Manteiga"},
-    {"Item": "8 Pães(Francês)"},
-    {"Item": "1 Pão(Fatiado)"},
-    {"Item": "1 Bolo, Cuca ou Similar"},
-    {"Item": "2lt Café"},
-    {"Item": "2lt Leite"},
-    {"Item": "1lt Suco"},
-    {"Item": "Bolacha, Torrada ou Similar"}
-]
+[{"Item":"300g de Queijo"},{"Item":"300g de Presunto"},{"Item":"1 Manteiga"},{"Item":"8 P\u00e3es(Franc\u00eas)"},{"Item":"1 P\u00e3o(Fatiado)"},{"Item":"1 Bolo, Cuca ou Similar"},{"Item":"2lt Caf\u00e9"},{"Item":"2lt Leite"},{"Item":"Bolacha, Torrada ou Similar"},{"Item":"novo item!"}]

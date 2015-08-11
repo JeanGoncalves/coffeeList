@@ -39,7 +39,8 @@
                 <p>Listas dos Itens disponíveis</p>
             </div>
         </div>
-        <form class="ui form attached fluid segment" method="get">
+        <form class="ui form attached fluid segment" action="action.item.php" method="POST">
+            <input type="hidden" name="tipo" value="add">
             <div class="field">
                 <div class="two fields">
                     <div class="field">
@@ -70,20 +71,20 @@
                     $itens = new Item;
                     $item = $itens->loadItens();
 
-                    foreach ($item as $value) {
+                    foreach ($item as $key => $value) {
                         echo "  <tr>
                                     <td>{$value[Item]}</td>
                                     <td>
-                                        <button class=\"ui red icon button\">
-                                            <i class=\"trash icon\"></i>
-                                        </button>
+                                        <form action=\"action.item.php\" method=\"POST\">
+                                            <input type=\"hidden\" name=\"tipo\" value=\"del\">
+                                            <input type=\"hidden\" name=\"key\" value=\"{$key}\">
+                                            <button class=\"ui red icon button\">
+                                                <i class=\"trash icon\"></i>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>";
                     }
-
-                    // foreach ($list as $value) {
-                    //     $action->listHtml( $value );
-                    // }
 
                 ?>
               </tbody>
