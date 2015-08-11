@@ -92,8 +92,24 @@
 				<?php 
 
 					$list = $action->loadList( $key );
-					foreach ($list as $value) {
-						$action->listHtml( $value );
+					foreach ($list as $reg => $value) {
+						echo "	<tr>
+									<td>
+										<a class=\"ui {$action->getColor()} large circular label\">{$value[Letra]}</a>
+										{$value[Nome]}
+										<small>{$value[Sobrenome]}</small></td>
+									<td>{$value[Item]}</td>
+									<td>
+                                        <form action=\"action.list.php\" method=\"POST\">
+                                            <input type=\"hidden\" name=\"tipo\" value=\"del\">
+                                            <input type=\"hidden\" name=\"key\" value=\"{$key}\">
+                                            <input type=\"hidden\" name=\"reg\" value=\"{$reg}\">
+                                            <button class=\"ui red icon button\">
+                                                <i class=\"trash icon\"></i>
+                                            </button>
+                                        </form>
+									</td>
+								</tr>";
 					}
 
 				?>

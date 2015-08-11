@@ -79,9 +79,13 @@
                                         <a href='index.php?key=$value[key]'>$value[qtd]</a>
                                     </td>
                                     <td>
-                                        <button class=\"ui red icon button\">
-                                            <i class=\"trash icon\"></i>
-                                        </button>
+                                        <form action=\"action.list.php\" method=\"POST\">
+                                            <input type=\"hidden\" name=\"tipo\" value=\"del\">
+                                            <input type=\"hidden\" name=\"key\" value=\"{$value[key]}\">
+                                            <button class=\"ui red icon button\">
+                                                <i class=\"trash icon\"></i>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>";
                     }

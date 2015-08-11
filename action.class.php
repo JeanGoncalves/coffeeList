@@ -61,32 +61,54 @@ class Action extends Helper
 		if( isset( $vKey ) )
 			$key = $vKey;
 		else
-			$key = self::nextList( $read, $key );
-		$cont = count($lista[$key][lista]);
+			$key = self::nextList( $lista, $key );
 		array_push($lista[$key][lista],$obj);
 		$lista = json_encode($lista,JSON_UNESCAPED_SLASHES);
 		$lista = parent::ManipulateArchive($this->list, 'w', $lista);
 		header("location:index.php?key=".$key);
 	}
 
-	public function listHtml( $obj ) {
+	public function deleteKey( $vKey, $reg = null ) {
+		$lista = parent::ManipulateArchive($this->list,'r');
+		if( isset( $vKey ) )
+			$key = $vKey;
+		else
+			die('É necessário inserir pelo menos a chave a ser deletada.');
+
+		$i = 0;
+		if( !is_null($reg) ) {
+			unset( $lista[$vKey][lista][$reg] );
+			foreach ($lista[$vKey][lista] as $key => $value) {
+				if( $key > $i ) {
+					$lista[$vKey][lista][$i] = $value;
+					unset($lista[$vKey][lista][$key]);
+				}
+				$i++;
+			}
+			$url = "index.php?key=".$vKey;
+		}
+		else {
+			$cont = (count($lista) - 1);
+			unset( $lista[$vKey] );
+			foreach($lista as $key => $value) {
+				if( $key > $i ) {
+					$lista[$i] = $value;
+					unset($lista[$key]);
+				}
+				$i++;
+			}
+			$url = "list.php";
+		}
+
+		$lista = json_encode($lista,JSON_UNESCAPED_SLASHES);
+		$lista = parent::ManipulateArchive($this->list, 'w', $lista);
+		header("location:".$url);
+
+	}
+
+	public function getColor() {
 		$color = array_rand($this->arrayColor,1);
-		echo "	<tr>
-					<td>
-						<h4 class='ui header'>
-							<a class='ui {$this->arrayColor[$color]} circular label'>{$obj[Letra]}</a>
-							<div class='content'>
-								{$obj[Nome]} <small>{$obj[Sobrenome]}</small>
-							</div>
-						</h4>
-					</td>
-					<td>{$obj[Item]}</td>
-					<td>
-						<button class=\"ui red icon button\">
-                            <i class=\"trash icon\"></i>
-                        </button>
-					</td>
-				</tr>";
+		return $this->arrayColor[$color];
 	}
 
 	private function nextList( $obj, $vKey ) {
@@ -114,7 +136,7 @@ class Action extends Helper
 				$sobrenome .= $nome[$i].' ';
 			$obj[$key][Sobrenome] = $sobrenome;
 			$obj[$key][Nome] = $nome[0];
-			$obj[$key][Letra] = substr($value[Nome],0,1);
+			$obj[$key][Letra] = strtoupper(substr($value[Nome],0,1));
 		}
 		return $obj;
 	}
