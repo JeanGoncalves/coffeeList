@@ -4,9 +4,11 @@ require_once 'helper.class.php';
 
 class Action extends Helper
 {		
-	private $list = 'archives/arquivo.list';
+	private $list = "archives/arquivo.list";
 	private $dateNow;
 	private $arrayColor = Array("red","orange","yellow","olive","green","teal","blue","violet","purple","pink","brown","grey","black");
+	private $urlIndex = "index.php";
+	private $urlList = "list.php";
 
 	function __construct() {
 		$this->dateNow = date('Y-m-d');
@@ -33,7 +35,7 @@ class Action extends Helper
 		parent::varDump($lista);
 		$lista = json_encode($lista,JSON_UNESCAPED_SLASHES);
 		$lista = parent::ManipulateArchive($this->list, 'w', $lista);
-		header("location:index.php?key=".$key);
+		header("location:{$this->urlIndex}?key=".$key);
 
 	}
 
@@ -65,7 +67,7 @@ class Action extends Helper
 		array_push($lista[$key][lista],$obj);
 		$lista = json_encode($lista,JSON_UNESCAPED_SLASHES);
 		$lista = parent::ManipulateArchive($this->list, 'w', $lista);
-		header("location:index.php?key=".$key);
+		header("location:{$this->urlIndex}?key=".$key);
 	}
 
 	public function deleteKey( $vKey, $reg = null ) {
@@ -85,7 +87,7 @@ class Action extends Helper
 				}
 				$i++;
 			}
-			$url = "index.php?key=".$vKey;
+			$url = $this->urlIndex."?key=".$vKey;
 		}
 		else {
 			$cont = (count($lista) - 1);
@@ -97,7 +99,7 @@ class Action extends Helper
 				}
 				$i++;
 			}
-			$url = "list.php";
+			$url = $this->urlList;
 		}
 
 		$lista = json_encode($lista,JSON_UNESCAPED_SLASHES);

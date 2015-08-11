@@ -1,5 +1,5 @@
 <?php  
-	include 'action.class.php';
+	include 'class/action.class.php';
 
 	$key = null;
 	if( isset($_GET['key']) )
@@ -49,7 +49,7 @@
 				<p>Marque abaixo seu nome e o que vai trazer para o café. <i class="thumbs outline up icon"></i></p>
 			</div>
 		</div>
-		<form class="ui form attached fluid segment" method="POST" action="action.list.php">
+		<form class="ui form attached fluid segment" method="POST" action="action/action.list.php">
             <input type="hidden" name="tipo" value="home">
             <input type="hidden" name="key" value="<?= $key ?>">
 			<div class="field">
@@ -63,7 +63,7 @@
 						<select class="ui dropdown" name="item">
 						<?php 
 
-							include "item.class.php";
+							include "class/item.class.php";
 
 							$itens = new Item;
 							$itens->listSelect();
@@ -100,7 +100,7 @@
 										<small>{$value[Sobrenome]}</small></td>
 									<td>{$value[Item]}</td>
 									<td>
-                                        <form action=\"action.list.php\" method=\"POST\">
+                                        <form action=\"action/action.list.php\" method=\"POST\">
                                             <input type=\"hidden\" name=\"tipo\" value=\"del\">
                                             <input type=\"hidden\" name=\"key\" value=\"{$key}\">
                                             <input type=\"hidden\" name=\"reg\" value=\"{$reg}\">

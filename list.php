@@ -39,7 +39,7 @@
                 <p>Listas de café</p>
             </div>
         </div>
-        <form class="ui form attached fluid segment" method="POST" action="action.list.php">
+        <form class="ui form attached fluid segment" method="POST" action="action/action.list.php">
             <input type="hidden" name="tipo" value="lista">
             <div class="field">
                 <div class="field">
@@ -65,7 +65,7 @@
                 <tbody>
                 <?php 
 
-                    include 'action.class.php';
+                    include 'class/action.class.php';
 
                     $action = new Action;
                     $list = $action->getLists();
@@ -79,7 +79,7 @@
                                         <a href='index.php?key=$value[key]'>$value[qtd]</a>
                                     </td>
                                     <td>
-                                        <form action=\"action.list.php\" method=\"POST\">
+                                        <form action=\"action/action.list.php\" method=\"POST\">
                                             <input type=\"hidden\" name=\"tipo\" value=\"del\">
                                             <input type=\"hidden\" name=\"key\" value=\"{$value[key]}\">
                                             <button class=\"ui red icon button\">

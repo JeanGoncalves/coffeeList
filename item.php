@@ -39,7 +39,7 @@
                 <p>Listas dos Itens disponíveis</p>
             </div>
         </div>
-        <form class="ui form attached fluid segment" action="action.item.php" method="POST">
+        <form class="ui form attached fluid segment" action="action/action.item.php" method="POST">
             <input type="hidden" name="tipo" value="add">
             <div class="field">
                 <div class="two fields">
@@ -66,7 +66,7 @@
                 <tbody>
                 <?php 
 
-                    include "item.class.php";
+                    include "class/item.class.php";
 
                     $itens = new Item;
                     $item = $itens->loadItens();
@@ -75,7 +75,7 @@
                         echo "  <tr>
                                     <td>{$value[Item]}</td>
                                     <td>
-                                        <form action=\"action.item.php\" method=\"POST\">
+                                        <form action=\"action/action.item.php\" method=\"POST\">
                                             <input type=\"hidden\" name=\"tipo\" value=\"del\">
                                             <input type=\"hidden\" name=\"key\" value=\"{$key}\">
                                             <button class=\"ui red icon button\">

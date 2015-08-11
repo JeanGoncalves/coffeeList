@@ -1,6 +1,6 @@
 <?php 
 
-	include 'action.class.php';
+	include 'class/action.class.php';
 	
 	$action = new Action;
 	if( $_POST ) {

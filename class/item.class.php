@@ -4,7 +4,8 @@ require_once 'helper.class.php';
 
 class Item extends Helper
 {
-	private $arq = 'archives/itens.list';
+	private $arq = "archives/itens.list";
+	private $urlItem = "item.php";
 
 	public function loadItens() {
 		$itens = parent::ManipulateArchive($this->arq, 'r');
@@ -24,7 +25,7 @@ class Item extends Helper
 		array_push($itens, Array('Item'=>$nome));
 		$itens = json_encode($itens,JSON_UNESCAPED_SLASHES);
 		parent::ManipulateArchive($this->arq, 'w', $itens);
-		header('location:item.php');
+		header('location:'.$this->urlItem);
 	}
 
 	public function deleteItem( $vKey ) {
@@ -40,7 +41,7 @@ class Item extends Helper
 		}
 		$itens = json_encode($itens,JSON_UNESCAPED_SLASHES);
 		parent::ManipulateArchive($this->arq, 'w', $itens);
-		header('location:item.php');
+		header('location:'.$this->urlItem);
 	}
 }
 
