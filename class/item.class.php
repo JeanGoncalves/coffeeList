@@ -5,7 +5,7 @@ require_once 'helper.class.php';
 class Item extends Helper
 {
 	private $arq = "archives/itens.list";
-	private $urlItem = "item.php";
+	private $urlItem = "../item.php";
 
 	public function loadItens() {
 		$itens = parent::ManipulateArchive($this->arq, 'r');

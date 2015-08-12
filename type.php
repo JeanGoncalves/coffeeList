@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Item | AgênciaSys</title>
+    <title>História | AgênciaSys</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- SEMANTIC UI -->
@@ -24,9 +24,9 @@
             </div>
         </div>
       <a href="index.php" class="item">Início</a>
-      <a href="list.php" class="item">Lista</a>
-      <a class="item active">Ítem</a>
-      <a href="type.php" class="item">Tipo</a>
+      <a href="list.php"  class="item">Lista</a>
+      <a href="item.php" class="item ">Ítem</a>
+      <a class="item active">Tipo</a>
     </div>
 
     <div class="ui container">
@@ -34,24 +34,24 @@
             <i class="file text outline icon"></i>
             <div class="content">
                 <div class="header">
-                    Itens
+                    Tipos
                 </div>
-                <p>Listas dos Itens disponíveis</p>
+                <p>Tipos de quantidades para os Ítens</p>
             </div>
         </div>
-        <form class="ui form attached fluid segment" action="action/action.item.php" method="POST">
+        <form class="ui form attached fluid segment" method="POST" action="action/action.tipo.php">
             <input type="hidden" name="tipo" value="add">
-            <div class="field">
-                <div class="two fields">
-                    <div class="field">
-                        <label>Item</label>
-                        <input name="nome" placeholder="Insira o Item" type="text">
+            <div class="six fields">
+                <div class="field">
+                    <label>Tipo</label>
+                    <div class="ui icon input">
+                        <input name="nome" id="nome" type="text">
                     </div>
                 </div>
             </div>
             <button class="ui blue labeled icon button" tabindex="0">
                 <i class="checkmark box icon"></i>
-                Gravar
+                Criar Tipo
             </button>
         </form>
 
@@ -59,23 +59,23 @@
             <table class="ui blue striped table">
                 <thead>
                     <tr>
-                        <th class="sixteen wide">Ítem</th>
-                        <th class="two wide"></th>
+                        <th class="six wide center aligned">Nome</th>
+                        <th class="six wide center aligned"></th>
                     </tr>
                 </thead>
                 <tbody>
                 <?php 
 
-                    include "class/item.class.php";
+                    include 'class/tipo.class.php';
 
-                    $itens = new Item;
-                    $item = $itens->loadItens();
+                    $tipo = new Tipo;
+                    $list = $tipo->loadTipos();
 
-                    foreach ($item as $key => $value) {
+                    foreach ($list as $key => $value) {
                         echo "  <tr>
-                                    <td>{$value[Item]}</td>
-                                    <td>
-                                        <form action=\"action/action.item.php\" method=\"POST\">
+                                    <td class='center aligned'>{$value['type']}</td>
+                                    <td class='right aligned'>
+                                        <form action=\"action/action.tipo.php\" method=\"POST\">
                                             <input type=\"hidden\" name=\"tipo\" value=\"del\">
                                             <input type=\"hidden\" name=\"key\" value=\"{$key}\">
                                             <button class=\"ui red icon button\">

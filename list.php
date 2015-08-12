@@ -26,7 +26,7 @@
       <a href="index.php" class="item">Início</a>
       <a class="item active">Lista</a>
       <a href="item.php" class="item">Ítem</a>
-      <a href="history.php" class="item">Histórico</a>
+      <a href="type.php" class="item">Tipo</a>
     </div>
 
     <div class="ui container">
@@ -41,10 +41,13 @@
         </div>
         <form class="ui form attached fluid segment" method="POST" action="action/action.list.php">
             <input type="hidden" name="tipo" value="lista">
-            <div class="field">
+            <div class="six fields">
                 <div class="field">
                     <label>Data</label>
-                    <input name="data" id="data" type="text">
+                    <div class="ui icon input">
+                        <input name="data" id="data" type="text">
+                        <i class="calendar icon"></i>
+                    </div>
                 </div>
             </div>
             <button class="ui blue labeled icon button" tabindex="0">

@@ -7,8 +7,8 @@ class Action extends Helper
 	private $list = "archives/arquivo.list";
 	private $dateNow;
 	private $arrayColor = Array("red","orange","yellow","olive","green","teal","blue","violet","purple","pink","brown","grey","black");
-	private $urlIndex = "index.php";
-	private $urlList = "list.php";
+	private $urlIndex = "../index.php";
+	private $urlList = "../list.php";
 
 	function __construct() {
 		$this->dateNow = date('Y-m-d');
@@ -101,7 +101,6 @@ class Action extends Helper
 			}
 			$url = $this->urlList;
 		}
-
 		$lista = json_encode($lista,JSON_UNESCAPED_SLASHES);
 		$lista = parent::ManipulateArchive($this->list, 'w', $lista);
 		header("location:".$url);

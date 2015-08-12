@@ -15,9 +15,9 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- SEMANTIC UI -->
+    <script type="text/javascript" src="maskedinput/jquery-1.11.3.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="Semantic-UI/dist/semantic.min.css">
 	<script src="Semantic-UI/dist/semantic.min.js"></script>
-
 </head>
 <body>
 	
@@ -36,7 +36,7 @@
 	  <a class="item active">Início</a>
 	  <a href="list.php" class="item">Lista</a>
 	  <a href="item.php" class="item">Ítem</a>
-	  <a href="history.php" class="item">Histórico</a>
+	  <a href="type.php" class="item">Tipo</a>
 	</div>
 
 	<div class="ui container">
@@ -54,22 +54,54 @@
             <input type="hidden" name="key" value="<?= $key ?>">
 			<div class="field">
 				<div class="two fields">
-					<div class="field">
+					<div class="field seven wide column">
 						<label>Nome</label>
 						<input name="nome" placeholder="Insira seu nome" type="text">
 					</div>
 					<div class="field">
-						<label>Ítem</label>
-						<select class="ui dropdown" name="item">
-						<?php 
+						<div class="ui grid">
+							<div class="twelve field wide column">
+								
+								<label>Ítem</label>
+								<select class="ui dropdown" name="item">
+								<?php 
 
-							include "class/item.class.php";
+									include "class/item.class.php";
 
-							$itens = new Item;
-							$itens->listSelect();
-							
-						?>
-						</select>
+									$itens = new Item;
+									$itens->listSelect();
+									
+								?>
+								</select>
+
+							</div>
+							<div class="four wide field column">
+								
+								<label>Quantidade</label>
+								<div class="ui right labeled input">
+									<input name="qtd" type="text">
+									<div class="ui dropdown label">
+									<input type="hidden" name="type">
+										<div class="text">Lt</div>
+										<i class="dropdown icon"></i>
+										<div class="menu">
+											<?php 
+
+												include 'class/tipo.class.php';
+
+												$tipos = new Tipo;
+												$arr = $tipos->loadTipos();
+												foreach ($arr as $value) {
+													echo "<div class='item'>".$value['qtd']."</div>";
+												}
+											?>
+										</div>
+
+									</div>
+								</div>
+
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -98,7 +130,7 @@
 										<a class=\"ui {$action->getColor()} large circular label\">{$value[Letra]}</a>
 										{$value[Nome]}
 										<small>{$value[Sobrenome]}</small></td>
-									<td>{$value[Item]}</td>
+									<td>{$value['qtd']}{$value['type']} {$value[Item]}</td>
 									<td>
                                         <form action=\"action/action.list.php\" method=\"POST\">
                                             <input type=\"hidden\" name=\"tipo\" value=\"del\">
@@ -117,6 +149,11 @@
 			</table>
 		</div>
 	</div>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$('.ui .dropdown').dropdown();
+	})
+	</script>
 
 </body>
 </html>

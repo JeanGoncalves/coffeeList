@@ -1,16 +1,17 @@
 <?php 
 
-	include 'class/action.class.php';
+	include '../class/action.class.php';
 	
 	$action = new Action;
 	if( $_POST ) {
-
 		if( $_POST['tipo'] == 'home' ) {
 			$key = $_POST['key'];
 			$nome = $_POST['nome'];
 			$item = $_POST['item'];
+			$qtd = $_POST['qtd'];
+			$type = $_POST['type'];
 
-			$obj = Array("Nome" => $nome, "Item" => $item);
+			$obj = Array("Nome" => $nome, "Item" => $item, "qtd"=>$qtd, "type" => $type);
 
 			$action->editList( $key, $obj );
 		} else if( $_POST['tipo'] == 'lista' ) {

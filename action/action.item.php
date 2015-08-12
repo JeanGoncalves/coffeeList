@@ -1,6 +1,6 @@
 <?php 
 
-	include 'class/item.class.php';
+	include '../class/item.class.php';
 
 	$item = new Item;
 	if( $_POST ) {
