@@ -1,3 +1,4 @@
+
 <?php 
 
 	require_once 'helper.class.php';
@@ -23,6 +24,11 @@ class Tipo extends Helper
 		parent::ManipulateArchive($this->arq, 'w', $tipos);
 
 		header('location:'.$this->urlItem);
+	}
+
+	public function firstTipo() {
+		$tipos = self::loadTipos();
+		return $tipos[0]['type'];
 	}
 
 	public function deleteTipo( $vKey ) {

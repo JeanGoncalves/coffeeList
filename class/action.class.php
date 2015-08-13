@@ -32,7 +32,6 @@ class Action extends Helper
 		$key = count($lista);
 		$obj = Array('Data'=>$date, 'lista'=> Array());
 		array_push( $lista, $obj );
-		parent::varDump($lista);
 		$lista = json_encode($lista,JSON_UNESCAPED_SLASHES);
 		$lista = parent::ManipulateArchive($this->list, 'w', $lista);
 		header("location:{$this->urlIndex}?key=".$key);
@@ -55,7 +54,7 @@ class Action extends Helper
 			$key = $vKey;
 		else
 			$key = self::nextList( $read, $key );
-		return $read[$key][Data];
+		return Array('date'=>$read[$key][Data],'key'=>$key);
 	}
 
 	public function editList( $vKey, $obj ) {
@@ -87,7 +86,7 @@ class Action extends Helper
 				}
 				$i++;
 			}
-			$url = $this->urlIndex."?key=".$vKey;
+			$url = $this->urlIndex."?key=".$key;
 		}
 		else {
 			$cont = (count($lista) - 1);

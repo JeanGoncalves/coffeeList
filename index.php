@@ -6,7 +6,9 @@
 		$key = $_GET['key'];
 
 	$action = new Action;
-	$date = $action->getDate( $key );
+	$return = $action->getDate( $key );
+	$date = $return['date'];
+	$key = $return['key'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -39,6 +41,8 @@
 	  <a href="type.php" class="item">Tipo</a>
 	</div>
 
+
+	<?php if( $date ) { ?>
 	<div class="ui container">
 		<div class="ui icon attached message">
 			<i class="file text outline icon"></i>
@@ -77,23 +81,28 @@
 							</div>
 							<div class="four wide field column">
 								
+								<?php 
+
+									include 'class/tipo.class.php';
+
+									$tipos = new Tipo;
+									$first = $tipos->firstTipo();
+								?>
 								<label>Quantidade</label>
 								<div class="ui right labeled input">
 									<input name="qtd" type="text">
 									<div class="ui dropdown label">
-									<input type="hidden" name="type">
-										<div class="text">Lt</div>
+									<input type="hidden" value="<?= $first ?>" name="type">
+										<div class="text"><?= $first ?></div>
 										<i class="dropdown icon"></i>
 										<div class="menu">
 											<?php 
 
-												include 'class/tipo.class.php';
-
-												$tipos = new Tipo;
 												$arr = $tipos->loadTipos();
 												foreach ($arr as $value) {
-													echo "<div class='item'>".$value['qtd']."</div>";
+													echo "<div class='item'>".$value['type']."</div>";
 												}
+
 											?>
 										</div>
 
@@ -130,7 +139,7 @@
 										<a class=\"ui {$action->getColor()} large circular label\">{$value[Letra]}</a>
 										{$value[Nome]}
 										<small>{$value[Sobrenome]}</small></td>
-									<td>{$value['qtd']}{$value['type']} {$value[Item]}</td>
+									<td>{$value['qtd']}{$value['type']} de {$value[Item]}</td>
 									<td>
                                         <form action=\"action/action.list.php\" method=\"POST\">
                                             <input type=\"hidden\" name=\"tipo\" value=\"del\">
@@ -149,6 +158,21 @@
 			</table>
 		</div>
 	</div>
+	<?php } else { ?>
+
+		<div class="ui container">
+			<div class="ui icon attached message">
+			<i class="calendar icon"></i>
+			<div class="content">
+				<div class="header">
+					Não tem nenhuma lista adiante.
+				</div>
+				<p>Quer criar uma lista nova? Basta clicar no menu <strong>Lista</strong> ou <a href="list.php">Clique aqui</a>. <i class="thumbs outline up icon"></i></p>
+			</div>
+		</div>
+		</div>
+
+	<?php } ?>
 	<script type="text/javascript">
 	$(document).ready(function() {
 		$('.ui .dropdown').dropdown();
