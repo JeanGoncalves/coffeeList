@@ -24,6 +24,7 @@ class Action extends Helper
 			echo '<tr><td>Não tem lista futura.</td></tr>';
 		$read = self::FirstLetter( $read[$key][lista] );
 		fclose( $list );
+		asort($read);
 		return $read;
 	}
 

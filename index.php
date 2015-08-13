@@ -60,7 +60,7 @@
 				<div class="two fields">
 					<div class="field seven wide column">
 						<label>Nome</label>
-						<input name="nome" placeholder="Insira seu nome" type="text">
+						<input name="nome" autofocus placeholder="Insira seu nome" type="text">
 					</div>
 					<div class="field">
 						<div class="ui grid">
