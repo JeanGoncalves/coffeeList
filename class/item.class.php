@@ -9,6 +9,7 @@ class Item extends Helper
 
 	public function loadItens() {
 		$itens = parent::ManipulateArchive($this->arq, 'r');
+		asort($itens);
 		return $itens;
 	}
 
