@@ -38,6 +38,17 @@ class Action extends Helper
 
 	}
 
+	public function getNameItem( $vKey, $item ) {
+		$read = parent::ManipulateArchive($this->list, 'r');
+		$read = self::FirstLetter( $read[$vKey]['lista'] );
+		$response = Array();
+		foreach ($read as $value) {
+			if( strtoupper($item) == strtoupper($value['Item']) )
+				array_push($response,$value['Nome']);
+		}
+		return $response;
+	}
+
 	public function getLists() {
 		$response = Array();
 		$lists = parent::ManipulateArchive($this->list,'r');
@@ -86,7 +97,7 @@ class Action extends Helper
 				}
 				$i++;
 			}
-			$url = $this->urlIndex."?key=".$key;
+			$url = $this->urlIndex."?key=".$vKey;
 		}
 		else {
 			$cont = (count($lista) - 1);

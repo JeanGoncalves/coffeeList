@@ -67,17 +67,32 @@
 							<div class="twelve field wide column">
 								
 								<label>Ítem</label>
-								<select class="ui dropdown" name="item">
-								<?php 
+								<div class="ui selection search dropdown">
+									<input name="item" type="hidden">
+									<i class="dropdown icon"></i>
+									<div class="default text">Selecione</div>
+									<div class="menu">
+										<?php 
 
-									include "class/item.class.php";
+											include "class/item.class.php";
 
-									$itens = new Item;
-									$itens->listSelect();
-									
-								?>
-								</select>
-
+											$list = new Action;
+											$itens = new Item;
+											$item = $itens->loadItens();
+											foreach ($item as $value) {
+												echo "<div class='item' data-value='{$value['Item']}'>";
+												echo "<span class='text'>{$value['Item']}</span>";
+												$names = $list->getNameItem( $key, $value['Item'] );
+												foreach ($names as $name) {
+													echo "<span class='description'>{$name}</span>";
+												}
+												echo "</div>";
+												
+											}
+											
+										?>
+								  	</div>
+								</div>
 							</div>
 							<div class="four wide field column">
 								
@@ -136,10 +151,10 @@
 					foreach ($list as $reg => $value) {
 						echo "	<tr>
 									<td>
-										<a class=\"ui {$action->getColor()} large circular label\">{$value[Letra]}</a>
-										{$value[Nome]}
-										<small>{$value[Sobrenome]}</small></td>
-									<td>{$value['qtd']}{$value['type']} de {$value[Item]}</td>
+										<a class=\"ui {$action->getColor()} large circular label\">{$value['Letra']}</a>
+										{$value['Nome']}
+										<small>{$value['Sobrenome']}</small></td>
+									<td>{$value['qtd']} {$value['type']} de {$value['Item']}</td>
 									<td>
                                         <form action=\"action/action.list.php\" method=\"POST\">
                                             <input type=\"hidden\" name=\"tipo\" value=\"del\">
@@ -175,7 +190,9 @@
 	<?php } ?>
 	<script type="text/javascript">
 	$(document).ready(function() {
-		$('.ui .dropdown').dropdown();
+		$('.ui .dropdown').dropdown({
+			useLabels: true
+		});
 	})
 	</script>
 
