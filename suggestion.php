@@ -86,9 +86,13 @@
                                                 <div class=\"extra\">
                                                     <i><label>{$value['curtida']}</label> pessoas gostaram</i>
                                                 </div><br>
-                                                <button class=\"ui blue mini circular thumbs up icon button\">
-                                                    <i class=\"thumbs up icon\"></i>
-                                                </button>
+                                                <form action=\"action/action.suggestion.php\" method=\"POST\">
+                                                    <input type=\"hidden\" name=\"key\" value=\"{$key}\">
+                                                    <input type=\"hidden\" name=\"tipo\" value=\"like\">
+                                                    <button class=\"ui blue mini circular thumbs up icon submit button\">
+                                                        <i class=\"thumbs up icon\"></i>
+                                                    </button>
+                                                </form>
                                             </small>
                                         </div>
                                     </div>

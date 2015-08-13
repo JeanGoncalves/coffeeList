@@ -41,6 +41,17 @@ class Sugestao extends Helper
         parent::ManipulateArchive($this->arq, 'w', $sugestao);
         header('location:'.$this->urlItem);
     }
+
+    public function likeSugestao( $vKey ) {
+        $sugestao = parent::ManipulateArchive($this->arq, 'r');
+        $like = $sugestao[$vKey]['curtida'];
+        $sugestao[$vKey]['curtida'] = $like+1;
+        $sugestao = json_encode($sugestao,JSON_UNESCAPED_SLASHES);
+        parent::ManipulateArchive($this->arq, 'w', $sugestao);
+
+        header('location:'.$this->urlItem);
+
+    }
 }
 
 ?>

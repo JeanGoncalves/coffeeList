@@ -10,17 +10,17 @@
             $descricao = $_POST['descricao'];
             $nome = $_POST['nome'];
 
-            $tipo->addSugestao( $titulo, $descricao, $nome );
+            $sugestao->addSugestao( $titulo, $descricao, $nome );
         }
         else if( $_POST['tipo'] == 'del' ) {
             $key = $_POST['key'];
 
-            $tipo->deleteSugestao( $key );
+            $sugestao->deleteSugestao( $key );
         }
         else if( $_POST['tipo'] == 'like' ) {
             $key = $_POST['key'];
 
-            $tipo->likeSugestao( $key );
+            $sugestao->likeSugestao( $key );
         }
 
     }
