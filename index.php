@@ -39,6 +39,7 @@
 	  <a href="list.php" class="item">Lista</a>
 	  <a href="item.php" class="item">Ítem</a>
 	  <a href="type.php" class="item">Tipo</a>
+	  <a href="suggestion.php" class="item">Sugestões</a>
 	</div>
 
 

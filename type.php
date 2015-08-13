@@ -27,6 +27,7 @@
       <a href="list.php"  class="item">Lista</a>
       <a href="item.php" class="item ">Ítem</a>
       <a class="item active">Tipo</a>
+      <a href="suggestion.php" class="item">Sugestões</a>
     </div>
 
     <div class="ui container">
