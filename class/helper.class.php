@@ -24,8 +24,13 @@ class Helper
         $read = null;
         if( !file_exists($archive) ){
             $archive = '../'.$archive;
-            if( !file_exists($archive) )
-                die("O arquivo <strong>$archive</strong> não existe.");
+            if( !file_exists($archive) ) {
+                $arq = fopen($archive,'x+');
+                fwrite($arq,'[]');
+                fclose($arq);
+            }
+
+                // die("O arquivo <strong>$archive</strong> não existe.");
         }
 
     	$list = fopen( $archive,$type ) or die( "Não foi possivel carregar o arquivo <strong>$archive</strong>. Tipo: <strong>$type</strong>" );

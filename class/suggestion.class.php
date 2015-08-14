@@ -19,7 +19,7 @@ class Sugestao extends Helper
 
     public function addSugestao( $titulo, $descricao, $nome ) {
         $sugestao = parent::ManipulateArchive($this->arq, 'r');
-        array_push($sugestao, Array('data'=>date('d/m/Y G:i:s'), 'titulo'=>$titulo,'descricao'=>$descricao, 'nome'=>$nome,'curtida'=>0));
+        array_push($sugestao, Array('data'=>date('d/m/Y G:i:s'), 'descricao'=>nl2br(strip_tags($descricao)), 'nome'=>$nome,'curtida'=>0));
         $sugestao = json_encode($sugestao,JSON_UNESCAPED_SLASHES);
         parent::ManipulateArchive($this->arq, 'w', $sugestao);
 
