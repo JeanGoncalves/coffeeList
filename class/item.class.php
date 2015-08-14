@@ -17,13 +17,13 @@ class Item extends Helper
         $itens = self::loadItens();
 		echo "<option>Selecione</option>";
 		foreach ($itens as $value) {
-			echo "<option value='{$value[Item]}'>{$value[Item]}</option>";
+			echo "<option value='{$value['Item']}'>{$value['Item']}</option>";
 		}
 	}
 
-	public function addItem( $nome ) {
+	public function addItem( $nome, $type ) {
 		$itens = parent::ManipulateArchive($this->arq, 'r');
-		array_push($itens, Array('Item'=>$nome));
+		array_push($itens, Array('Item'=>$nome, 'Tipo'=>$type));
 		$itens = json_encode($itens,JSON_UNESCAPED_SLASHES);
 		parent::ManipulateArchive($this->arq, 'w', $itens);
 		header('location:'.$this->urlItem);

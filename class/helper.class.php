@@ -22,15 +22,16 @@ class Helper
 
         header ('Content-type: text/html; charset=UTF-8');
         $read = null;
-        if( !file_exists($archive) ){
+        if( file_exists('archives/') ) {
+            if( !file_exists($archive) ) {
+                self::createArchive($archive);
+            }
+        }
+        elseif( file_exists('../archives/') ){
             $archive = '../'.$archive;
             if( !file_exists($archive) ) {
-                $arq = fopen($archive,'x+');
-                fwrite($arq,'[]');
-                fclose($arq);
+                self::createArchive($archives);
             }
-
-                // die("O arquivo <strong>$archive</strong> não existe.");
         }
 
     	$list = fopen( $archive,$type ) or die( "Não foi possivel carregar o arquivo <strong>$archive</strong>. Tipo: <strong>$type</strong>" );
@@ -45,6 +46,19 @@ class Helper
 
 		fclose($list);
 		return $read;
+    }
+
+    private function createArchive( $archive ) {
+        $arq = fopen($archive,'x+');
+        fwrite($arq,'[]');
+        fclose($arq);
+    }
+
+    public function verifyAmbiance() {
+        $response = false;
+        if( $_SERVER['HTTP_HOST'] == 'localhost' )
+            $response = true;
+        return $response;
     }
 }
 

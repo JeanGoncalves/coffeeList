@@ -81,7 +81,7 @@
 											$itens = new Item;
 											$item = $itens->loadItens();
 											foreach ($item as $value) {
-												echo "<div class='item' data-value='{$value['Item']}'>";
+												echo "<div class='item' id='{$value['Tipo']}' data-value='{$value['Item']}'>";
 												echo "<span class='text'>{$value['Item']}</span>";
 												$names = $list->getNameItem( $key, $value['Item'] );
 												foreach ($names as $name) {
@@ -95,7 +95,7 @@
 								  	</div>
 								</div>
 							</div>
-							<div class="four wide field column">
+							<div class="four wide field column disabled" id="componentQtd">
 								
 								<?php 
 
@@ -105,26 +105,11 @@
 									$first = $tipos->firstTipo();
 								?>
 								<label>Quantidade</label>
-								<div class="ui right labeled input">
-									<input name="qtd" type="text">
-									<div class="ui dropdown label">
-									<input type="hidden" value="<?= $first ?>" name="type">
-										<div class="text"><?= $first ?></div>
-										<i class="dropdown icon"></i>
-										<div class="menu">
-											<?php 
-
-												$arr = $tipos->loadTipos();
-												foreach ($arr as $value) {
-													echo "<div class='item'>".$value['type']."</div>";
-												}
-
-											?>
-										</div>
-
-									</div>
+								<div class="ui right labeled input" id="labelQtd">
+									<input name="qtd" type="text" class="inputQtd" disabled>
+									<input type="hidden" class="type" name="type">
+									<div class="ui label"></div>
 								</div>
-
 							</div>
 						</div>
 					</div>
@@ -192,7 +177,13 @@
 	<script type="text/javascript">
 	$(document).ready(function() {
 		$('.ui .dropdown').dropdown({
-			useLabels: true
+			useLabels: true,
+		    onChange: function(value, text, $selectedItem) {
+		    	$("#componentQtd").removeClass('disabled');
+		    	$(".inputQtd").prop('disabled',false);
+		    	$('#labelQtd .label').html($selectedItem[0].id);
+		    	$('#labelQtd .type').val($selectedItem[0].id);
+		    }
 		});
 	})
 	</script>

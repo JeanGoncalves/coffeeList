@@ -52,10 +52,14 @@
                     $sugestoes = $sugestao->loadSugestao();
                     $divider = "<div class=\"ui divider\"></div>";
 
+                    if( count($sugestoes) == 0 ) {
+                        echo 'Ainda não posui nenhuma sugestão. <br>Escreva abaixo a primeira sugestão.';
+                    } else
                     foreach ($sugestoes as $key => $value) {
                     if( count($sugestoes) == ($key+1) )
                         $divider = '';
 
+                        
                     echo "  <div class=\"ui comments\">
                                 <div class=\"comment\">
                                     <a class=\"avatar\">
@@ -76,7 +80,7 @@
                                     }
                                     echo "</div>
                                         <div class=\"text\">{$value['descricao']}</div>
-                                        <div class=\"actions\">
+                                        <div class=\"actions buttons\">
                                             <form action=\"action/action.suggestion.php\" method=\"POST\">
                                                 <input type=\"hidden\" name=\"key\" value=\"{$key}\">
                                                 <input type=\"hidden\" name=\"tipo\" value=\"like\">

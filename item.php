@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- SEMANTIC UI -->
+    <script type="text/javascript" src="maskedinput/jquery-1.11.3.min.js"></script>
     <link rel="stylesheet" type="text/css" href="Semantic-UI/dist/semantic.min.css">
     <script src="Semantic-UI/dist/semantic.min.js"></script>
 
@@ -48,6 +49,31 @@
                         <label>Item</label>
                         <input name="nome" placeholder="Insira o Item" type="text">
                     </div>
+                    <div class="field">
+                        <?php 
+
+                            include 'class/tipo.class.php';
+
+                            $tipos = new Tipo;
+                            $first = $tipos->firstTipo();
+                        ?>
+                        <label>Tipo</label>
+                        <div class="ui dropdown button">
+                          <input type="hidden" value="<?= $first ?>" name="type">
+                          <span class="text"><?= $first ?></span>
+                          <div class="menu">
+                            <?php 
+
+                                $arr = $tipos->loadTipos();
+                                foreach ($arr as $value) {
+                                    echo "<div class='item'>".$value['type']."</div>";
+                                }
+
+                            ?>
+                          </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <button class="ui blue labeled icon button" tabindex="0">
@@ -60,7 +86,8 @@
             <table class="ui blue striped table">
                 <thead>
                     <tr>
-                        <th class="sixteen wide">Ítem</th>
+                        <th class="thirteen wide">Ítem</th>
+                        <th class="two wide">Tipo</th>
                         <th class="two wide"></th>
                     </tr>
                 </thead>
@@ -74,7 +101,8 @@
 
                     foreach ($item as $key => $value) {
                         echo "  <tr>
-                                    <td>{$value[Item]}</td>
+                                    <td>{$value['Item']}</td>
+                                    <td>{$value['Tipo']}</td>
                                     <td>
                                         <form action=\"action/action.item.php\" method=\"POST\">
                                             <input type=\"hidden\" name=\"tipo\" value=\"del\">
@@ -92,6 +120,14 @@
             </table>
         </div>
     </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.ui .dropdown').dropdown({
+                useLabels: true
+            });
+        })
+    </script>
 
 </body>
 </html>
