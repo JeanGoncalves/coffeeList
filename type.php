@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>História | AgênciaSys</title>
+    <title>Tipo | AgênciaSys</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- SEMANTIC UI -->
