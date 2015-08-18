@@ -109,7 +109,7 @@
 								<label>Quantidade</label>
 								<div class="ui right labeled input" id="labelQtd">
 									<input name="qtd" type="text" id="inputQtd" class="inputQtd" disabled>
-									<input type="hidden" class="type" name="type">
+									<input type="hidden" class="type" name="type" data-name="">
 									<div class="ui label"></div>
 								</div>
 							</div>

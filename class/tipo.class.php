@@ -17,9 +17,9 @@ class Tipo extends Helper
 		return $tipos;
 	}
 
-	public function addTipo( $nome ) {
+	public function addTipo( $nome, $tipo ) {
 		$tipos = parent::ManipulateArchive($this->arq, 'r');
-		array_push($tipos, Array('type'=>$nome));
+		array_push($tipos, Array('nome'=>$nome,'type'=>$tipo));
 		$tipos = json_encode($tipos,JSON_UNESCAPED_SLASHES);
 		parent::ManipulateArchive($this->arq, 'w', $tipos);
 

@@ -44,9 +44,15 @@
             <input type="hidden" name="tipo" value="add">
             <div class="six fields">
                 <div class="field">
-                    <label>Tipo</label>
+                    <label>Nome</label>
                     <div class="ui icon input">
                         <input name="nome" id="nome" type="text">
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Tipo</label>
+                    <div class="ui icon input">
+                        <input name="type" id="type" type="text">
                     </div>
                 </div>
             </div>
@@ -61,6 +67,7 @@
                 <thead>
                     <tr>
                         <th class="six wide center aligned">Nome</th>
+                        <th class="six wide center aligned">Tipo</th>
                         <th class="six wide center aligned"></th>
                     </tr>
                 </thead>
@@ -74,6 +81,7 @@
 
                     foreach ($list as $key => $value) {
                         echo "  <tr>
+                                    <td class='center aligned'>{$value['nome']}</td>
                                     <td class='center aligned'>{$value['type']}</td>
                                     <td class='right aligned'>
                                         <form action=\"action/action.tipo.php\" method=\"POST\">
