@@ -6,7 +6,7 @@ $(document).ready(function() {
 	    	$(".inputQtd").prop('disabled',false);
 	    	$('#labelQtd .label').html($selectedItem[0].id);
 	    	$('#labelQtd .type').val($selectedItem[0].id);
-	    	$('inputQtd').focus();
+	    	$('#inputQtd').focus().val('');
 	    }
 	});
 
