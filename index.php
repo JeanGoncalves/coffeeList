@@ -118,13 +118,13 @@
 				</div>
 			</div>
 			<div class="ui grid">
-			  <div class="seven wide column">
+			  <div class="six wide column">
 					<button class="ui blue labeled icon button" tabindex="0">
 						<i class="checkmark box icon"></i>
 						Vou trazer
 					</button>
 			  </div>
-			  <div class="nine wide column">
+			  <div class="ten wide column">
 					<div class="ui small icon yellow message hidden" id="notificationMessage">
 					<i class="icon idea"></i>
 					  Este item ja tem na lista e normalmente não passa dessa quantidade.Que tal trocar este item pelo Café?

@@ -1,6 +1,7 @@
 <?php 
 
 require_once 'helper.class.php';
+require_once 'item.class.php';
 
 /**
 * script
@@ -81,6 +82,25 @@ class Script extends Helper
                 return $key;
         }
         return -1;
+    }
+
+    public function randomItem( $data ) {
+        while($data) {
+            $item = new Item;
+            $item = $item->loadItens();
+            $response = Array();
+            foreach ($item as $value) {
+                array_push($response,$value["Item"]);
+            }
+            $cont = count($response)-1;
+            $select = $response[rand(0,$cont)];
+            $media = self::getMediaItem($select);
+            $qtdList = self::getQtdList( $data, $select );
+            if( $media['med'] > $qtdList )
+                return $select;
+            else if( empty($media) && $qtdList == 0 )
+                return $select;
+        }
     }
 }
 

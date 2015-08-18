@@ -18,7 +18,7 @@ if( $_POST ) {
 	$response = Array();
 	if( $media['med'] > 0 ) {
 		if( $qtd2 >= $media['med'] ) {
-			$response = Array('retorno'=>false,'tipo'=>'lista','qtd'=>$qtd2,'med'=>$media['med']);
+			$response = Array('retorno'=>false,'tipo'=>'lista','qtd'=>$qtd2,'med'=>$media['med'],'recomendado'=>$script->randomItem($data));
 		} else if( ($qtd2+$qtd) >= $media['med'] ) {
 			$response = Array('retorno'=>false,'tipo'=>'item','qtd'=>$qtd2,'med'=>$media['med']);
 		} else

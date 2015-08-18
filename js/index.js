@@ -7,6 +7,7 @@ $(document).ready(function() {
 	    	$('#labelQtd .label').html($selectedItem[0].id);
 	    	$('#labelQtd .type').val($selectedItem[0].id);
 	    	$('#inputQtd').focus().val('');
+            $('#notificationMessage').addClass('hidden');
 	    }
 	});
 
@@ -21,20 +22,14 @@ $(document).ready(function() {
     		qtd: vQtd
     	}, function(data) {
     		if( !data.retorno ) {
-    			if( data.tipo == 'lista' ) {
-    				alert('A média de '+vItem+' é de '+data.med+vTipo+', e na lista já possui '+data.qtd+vTipo);
-    			} else if( data.tipo == 'item' ) {
-    				alert('A média de '+vItem+' é de '+data.med+vTipo+', e na lista já possui '+data.qtd+vTipo);
-
-    			console.log(data);
-    			}
-    		}
-    		// if(data == 'lista') {
-    		// 	alert('média de produtos verificado com a lista ja ultrapassou');
-    		// } else if( data=='qtd' ) {
-    		// 	alert('média de produtos do histórico ja ultrapassou');
-    		// }
-
+                var icon = '<i class="icon idea"></i>';
+                if( data.tipo == 'lista' ) {
+                    var retorno = 'Este item ja tem na lista e normalmente não passa de '+data.med+vTipo+'.<br>Que tal levar '+data.recomendado+'?';
+                } else if( data.tipo == 'item' ) {
+                    var retorno = 'Você não esta selecionando muitos(as) '+vTipo+' de '+vItem+'?<br>Normalmente é comprado '+data.med+vTipo+' de '+vItem+' por Lista.';
+                }
+                $('#notificationMessage').html(icon+retorno).removeClass('hidden');
+    		} else $('#notificationMessage').addClass('hidden');
     	},'json');
 	});
 
