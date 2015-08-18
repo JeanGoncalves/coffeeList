@@ -47,7 +47,7 @@
                 <div class="two fields">
                     <div class="field">
                         <label>Item</label>
-                        <input name="nome" placeholder="Insira o Item" type="text">
+                        <input name="nome" autofocus placeholder="Insira o Item" type="text">
                     </div>
                     <div class="field">
                         <?php 

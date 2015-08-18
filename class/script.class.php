@@ -24,17 +24,38 @@ class Script extends Helper
     private function getItens() {
 
         $response = Array();
-        foreach ($this->lista as $value) {
+        foreach ($this->lista as $key => $value) {
             foreach ($value['lista'] as $item) {
-                array_push($response,Array('item' => $item['Item'], 'quantidade'=> $item['qtd']));
+                array_push($response,Array('item' => $item['Item'], 'quantidade'=> $item['qtd'], 'lista'=>$key));
             }
         }
         return $response;
     }
 
+    public function getQtdList( $data, $item ) {
+        $lista = $this->lista;
+        $keyList = -1;
+        $cont = 0;
+        foreach ($lista as $key => $list) {
+            if( $list['Data'] == $data )
+                $keyList = $key;
+        }
+
+        if( $keyList == -1 )
+            return 0;
+        else{
+            foreach ($lista[$keyList]['lista'] as $value) {
+                if( $value['Item'] == $item )
+                    $cont = $value['qtd'] + $cont;
+            }
+            return $cont;
+        }
+
+    }
+
     public function getMediaItem( $item ) {
         $itens = self::getItens();
-
+        
         $response = Array();
         foreach ($itens as $key => $value) {
             $key = self::array_verify($value['item'], $response);

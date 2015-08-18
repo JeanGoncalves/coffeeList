@@ -3,8 +3,9 @@
 include '../class/script.class.php';
 
 $item = $_GET['item'];
+$data = $_GET['data'];
 
 $script = new Script;
 $arr = $script->getMediaItem($item);
-var_dump($arr);
+$script->varDump($arr);
 ?>

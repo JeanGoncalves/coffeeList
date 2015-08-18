@@ -20,6 +20,7 @@
     <script type="text/javascript" src="maskedinput/jquery-1.11.3.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="Semantic-UI/dist/semantic.min.css">
 	<script src="Semantic-UI/dist/semantic.min.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
 </head>
 <body>
 	
@@ -55,6 +56,7 @@
 			</div>
 		</div>
 		<form class="ui form attached fluid segment" method="POST" action="action/action.list.php">
+            <input type="hidden" id="data" value="<?= $date ?>">
             <input type="hidden" name="tipo" value="home">
             <input type="hidden" name="key" value="<?= $key ?>">
 			<div class="field">
@@ -69,7 +71,7 @@
 								
 								<label>Ítem</label>
 								<div class="ui selection search dropdown">
-									<input name="item" type="hidden">
+									<input name="item" type="hidden" id="item">
 									<i class="dropdown icon"></i>
 									<div class="default text">Selecione</div>
 									<div class="menu">
@@ -106,7 +108,7 @@
 								?>
 								<label>Quantidade</label>
 								<div class="ui right labeled input" id="labelQtd">
-									<input name="qtd" type="text" class="inputQtd" disabled>
+									<input name="qtd" type="text" id="inputQtd" class="inputQtd" disabled>
 									<input type="hidden" class="type" name="type">
 									<div class="ui label"></div>
 								</div>
@@ -174,19 +176,5 @@
 		</div>
 
 	<?php } ?>
-	<script type="text/javascript">
-	$(document).ready(function() {
-		$('.ui .dropdown').dropdown({
-			useLabels: true,
-		    onChange: function(value, text, $selectedItem) {
-		    	$("#componentQtd").removeClass('disabled');
-		    	$(".inputQtd").prop('disabled',false);
-		    	$('#labelQtd .label').html($selectedItem[0].id);
-		    	$('#labelQtd .type').val($selectedItem[0].id);
-		    }
-		});
-	})
-	</script>
-
 </body>
 </html>
