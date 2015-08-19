@@ -13,6 +13,9 @@ class Header
         self::getMaskedin();
         self::getSemanticUi();
         self::getValidation();
+
+        if( $type == 'Início' )
+            self::getInicio();
     }
 
     private function setTitle( $title ) {
@@ -40,7 +43,12 @@ class Header
         echo '<link rel="stylesheet" type="text/css" href="Semantic-UI/dist/semantic.min.css">';
         echo '<script src="Semantic-UI/dist/semantic.min.js"></script>';
     }
+
     private function getValidation() {
         echo '<script type="text/javascript" src="js/validation.js"></script>';
+    }
+
+    private function getInicio() {
+        echo '<script type="text/javascript" src="js/index.js"></script>';
     }
 }
