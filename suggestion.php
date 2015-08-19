@@ -1,35 +1,16 @@
+<?php 
+    include_once 'class/header.class.php';
+    include_once 'class/menu.class.php';
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Sugestões | AgênciaSys</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- SEMANTIC UI -->
-    <link rel="stylesheet" type="text/css" href="Semantic-UI/dist/semantic.min.css">
-    <script src="Semantic-UI/dist/semantic.min.js"></script>
-
+    <?php new Header('Sugestão'); ?>
 </head>
 <body>
+    <?php new Menu('sugestoes'); ?>
     
-    <div class="ui secondary pointing menu">
-        <div class="item">
-            <div class="ui relaxed divided list">
-                <div class="item">
-                    <i class="large food middle aligned icon"></i>
-                    <div class="content">
-                        <a class="header">AgênciaSys</a>
-                        <div class="description">Lista do Café</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-      <a href="index.php" class="item">Início</a>
-      <a href="list.php" class="item">Lista</a>
-      <a href="item.php" class="item">Ítem</a>
-      <a href="type.php" class="item">Tipo</a>
-      <a class="item active">Sugestões</a>
-    </div>
-
     <div class="ui container">
         <div class="ui icon attached message">
             <i class="file text outline icon"></i>
@@ -107,13 +88,13 @@
                     <div class="field">
                         <div class="two fields">
                             <div class="field">
-                                <label>Nome</label>
-                                <input name="nome" placeholder="Insira seu nome" type="text">
+                                <label>Título</label>
+                                <input name="nome" class="validate" data-error="Insira um título para sugestão." placeholder="Insira seu nome" type="text">
                             </div>
                         </div>
                         <div class="field">
                             <label>Descrição</label>
-                            <textarea name="descricao" placeholder="Insira a descrição" rows="2"></textarea>
+                            <textarea name="descricao" class="validate" data-error="insira a descrição para a sugestão." placeholder="Insira a descrição" rows="2"></textarea>
                         </div>
                     </div>
                     <button class="ui blue labeled icon button" tabindex="0">

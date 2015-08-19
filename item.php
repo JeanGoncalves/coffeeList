@@ -1,36 +1,15 @@
+<?php 
+    include_once 'class/header.class.php';
+    include_once 'class/menu.class.php';
+?>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Item | AgênciaSys</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- SEMANTIC UI -->
-    <script type="text/javascript" src="maskedinput/jquery-1.11.3.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="Semantic-UI/dist/semantic.min.css">
-    <script src="Semantic-UI/dist/semantic.min.js"></script>
-
+    <?php new Header('Item'); ?>
 </head>
 <body>
+    <?php new Menu('item'); ?>
     
-    <div class="ui secondary pointing menu">
-        <div class="item">
-            <div class="ui relaxed divided list">
-                <div class="item">
-                    <i class="large food middle aligned icon"></i>
-                    <div class="content">
-                        <a class="header">AgênciaSys</a>
-                        <div class="description">Lista do Café</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-      <a href="index.php" class="item">Início</a>
-      <a href="list.php" class="item">Lista</a>
-      <a class="item active">Ítem</a>
-      <a href="type.php" class="item">Tipo</a>
-      <a href="suggestion.php" class="item">Sugestões</a>
-    </div>
-
     <div class="ui container">
         <div class="ui icon attached message">
             <i class="file text outline icon"></i>
@@ -47,7 +26,7 @@
                 <div class="two fields">
                     <div class="field">
                         <label>Item</label>
-                        <input name="nome" autofocus placeholder="Insira o Item" type="text">
+                        <input name="nome" autofocus placeholder="Insira o Item" class="validate" data-error="Insira um item." type="text">
                     </div>
                     <div class="field">
                         <?php 

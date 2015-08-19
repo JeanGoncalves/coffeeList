@@ -1,34 +1,16 @@
+<?php 
+    include_once 'class/header.class.php';
+    include_once 'class/menu.class.php';
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Tipo | AgênciaSys</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- SEMANTIC UI -->
-    <link rel="stylesheet" type="text/css" href="Semantic-UI/dist/semantic.min.css">
-    <script src="Semantic-UI/dist/semantic.min.js"></script>
-
+    <?php new Header('Tipo'); ?>
 </head>
 <body>
     
-    <div class="ui secondary pointing menu">
-        <div class="item">
-            <div class="ui relaxed divided list">
-                <div class="item">
-                    <i class="large food middle aligned icon"></i>
-                    <div class="content">
-                        <a class="header">AgênciaSys</a>
-                        <div class="description">Lista do Café</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-      <a href="index.php" class="item">Início</a>
-      <a href="list.php"  class="item">Lista</a>
-      <a href="item.php" class="item ">Ítem</a>
-      <a class="item active">Tipo</a>
-      <a href="suggestion.php" class="item">Sugestões</a>
-    </div>
+    <?php new Menu('tipo'); ?>
 
     <div class="ui container">
         <div class="ui icon attached message">
@@ -46,7 +28,7 @@
                 <div class="field">
                     <label>Tipo</label>
                     <div class="ui icon input">
-                        <input name="nome" id="nome" type="text">
+                        <input name="nome" id="nome" class="validate" data-error="Insira um tipo." type="text">
                     </div>
                 </div>
             </div>
