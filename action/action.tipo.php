@@ -7,8 +7,8 @@
 
 		if( $_POST['tipo'] == 'add' ) {
 			$nome = $_POST['nome'];
-
-			$tipo->addTipo( $nome );
+			$type = $_POST['type'];
+			$tipo->addTipo( $nome, $type );
 		}
 		else if( $_POST['tipo'] == 'del' ) {
 			$key = $_POST['key'];
