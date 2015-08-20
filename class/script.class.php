@@ -27,7 +27,7 @@ class Script extends Helper
             case 'indices':
                     return self::Indices($list[0]);
             default:
-                    return $list[0];
+                    return $list;
                 break;
         }
     }
