@@ -100,13 +100,5 @@
         </div>
     </div>
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('.ui .dropdown').dropdown({
-                useLabels: true
-            });
-        })
-    </script>
-
 </body>
 </html>

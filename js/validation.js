@@ -10,4 +10,8 @@ $(document).ready(function() {
         });
     });
 
+    $('.ui .dropdown').dropdown({
+        useLabels: true
+    });
+
 });

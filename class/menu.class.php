@@ -8,9 +8,12 @@ class Menu
 
     private $menus = Array(
                         Array('nome'=>'inicio','title'=>'Início','href'=>'index.php'),
-                        Array('nome'=>'lista','title'=>'Lista','href'=>'list.php'),
-                        Array('nome'=>'item','title'=>'Item','href'=>'item.php'),
-                        Array('nome'=>'tipo','title'=>'Tipo','href'=>'type.php'),
+                        Array('nome'=>'cadastro','title'=>'Cadastro','dropdown'=> Array(
+                            Array('nome'=>'lista','title'=>'Lista','href'=>'list.php'),
+                            Array('nome'=>'item','title'=>'Item','href'=>'item.php'),
+                            Array('nome'=>'tipo','title'=>'Tipo','href'=>'type.php'))
+                            ),
+                        Array('nome'=>'relatorio','title'=>'Relatório','href'=>'relatorio.php'),
                         Array('nome'=>'sugestoes','title'=>'Sugestões','href'=>'suggestion.php'),
                         Array('nome'=>'sobre','title'=>'Sobre','href'=>'sobre.php','align'=>'right')
                         );
@@ -52,8 +55,17 @@ class Menu
                 $active = ' active';
             if( $value['align'] == 'right' )
                 $this->menuRight .= '<a href="'.$value['href'].'" class="item'.$active.'">'.$value['title'].'</a>';
-            else
-                $this->menuLeft .= '<a href="'.$value['href'].'" class="item'.$active.'">'.$value['title'].'</a>';
+            else {
+                if( isset($value['dropdown']) ) {
+                    $this->menuLeft .= '<div class="ui dropdown item">'.$value['title'].' <i class="dropdown icon"></i><div class="menu">';
+                    foreach ($value['dropdown'] as $drop) {
+                        $this->menuLeft .= '<a href="'.$drop['href'].'" class="item'.$active.'">'.$drop['title'].'</a>';
+                    }
+                    $this->menuLeft .= '</div></div>';
+                } else {
+                    $this->menuLeft .= '<a href="'.$value['href'].'" class="item'.$active.'">'.$value['title'].'</a>';
+                }
+            }
         }
         echo $this->menuLeft;
         echo '<div class="right menu">'.$this->menuRight.'</div>';

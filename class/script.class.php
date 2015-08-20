@@ -18,8 +18,26 @@ class Script extends Helper
         $this->lista = parent::ManipulateArchive($this->archives['lista'],'r');
     }
 
-    public function getList() {
-        parent::varDump($this->lista);
+    public function getList( $param ) {
+        $list = $this->lista;
+        switch ($param) {
+            case 'count':
+                    return self::Count($list);
+                break;
+            case 'indices':
+                    return self::Indices($list[0]);
+            default:
+                    return $list[0];
+                break;
+        }
+    }
+
+    private function Count($arr) {
+        return count($arr);
+    }
+
+    private function Indices($arr) {
+        return array_keys($arr);
     }
 
     private function getItens() {
