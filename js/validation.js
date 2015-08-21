@@ -14,4 +14,6 @@ $(document).ready(function() {
         useLabels: true
     });
 
+    $('.ui .popup').popup();
+
 });

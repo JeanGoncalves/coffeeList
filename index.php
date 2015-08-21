@@ -7,6 +7,10 @@
 	if( isset($_GET['key']) )
 		$key = $_GET['key'];
 
+	$item = null;
+	if( isset($_GET['item']) )
+		$item = urldecode($_GET['item']);
+
 	$action = new Action;
 	$return = $action->getDate( $key );
 	$date = $return['date'];
@@ -47,7 +51,7 @@
 								
 								<label>Ítem</label>
 								<div class="ui selection search dropdown">
-									<input name="item" type="hidden" class="validate" data-error="Selecione um item." id="item">
+									<input name="item" type="hidden" class="validate" data-error="Selecione um item." id="item" value="<?php echo $item; ?>">
 									<i class="dropdown icon"></i>
 									<div class="default text">Selecione</div>
 									<div class="menu">
@@ -59,7 +63,10 @@
 											$itens = new Item;
 											$item = $itens->loadItens();
 											foreach ($item as $value) {
-												echo "<div class='item' id='{$value['Tipo']}' data-value='{$value['Item']}'>";
+												$select = '';
+												if( $item == $value['Item'] )
+													$select = 'active selected';
+												echo "<div class='item $selected' id='{$value['Tipo']}' data-value='{$value['Item']}'>";
 												echo "<span class='text'>{$value['Item']}</span>";
 												$names = $list->getNameItem( $key, $value['Item'] );
 												foreach ($names as $name) {

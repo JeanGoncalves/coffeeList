@@ -2,6 +2,8 @@
     include_once 'class/header.class.php';
     include_once 'class/menu.class.php';
     include_once 'class/script.class.php';
+    include_once 'class/tipo.class.php';
+    include_once 'class/item.class.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,87 +27,98 @@
         <?php 
 
             $script = new Script;
-
+            $tipo = new Tipo;
+            $item = new Item;
             // $script->varDump($script->getList('indices'));
 
         ?>
 
         <div class="ui message">
-            <!-- <div class="ui statistics">
-                <div class="statistic">
-                    <div class="value"><?php echo $script->getList('count');  ?></div>
-                    <div class="label">
-                        <div class="ui simple dropdown">
-                          <div class="text">Listas</div>
-                          <div class="right menu">
-                            <div class="item">
-                                <i class="dropdown icon"></i>
-                                00/00/0000
-                                <div class="menu">
-                                    <div class="item">3 Itens</div>
-                                    <div class="item">1 Item</div>
-                                    <div class="item">5 Itens</div>
-                                </div>
-                            </div>
-                          </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="statistic">
-                    <div class="text value">Three<br>Thousand</div>
-                    <div class="label">Signups</div>
-                </div>
-                <div class="statistic">
-                    <div class="value"><i class="plane icon"></i> 5</div>
-                    <div class="label">Flights</div>
-                </div>
-                <div class="statistic">
-                    <div class="value"><img src="/images/avatar/small/joe.jpg" class="ui circular inline image">42</div>
-                    <div class="label">Team Members</div>
-                </div>
-            </div> -->
                 <?php 
 
-                    echo '<h1>'.$_GET['list'].'</h1>' ;
 
                     if( $_GET ) {
                         $listOrd = Array();
+
+                        $listKey = null;
+                        // Agrupa os itens iguais somando a quantidade
                         foreach ($script->getList() as $key => $list) {
                             if( $list['Data'] == $_GET['list'] ) {
+                                $listKey = $key;
                                 foreach ($list['lista'] as $key => $registro) {
-                                    if( $indice = array_search($registro['Item'],array_column($listOrd, 'item')) ) 
+                                    $indice = array_search($registro['Item'],array_column($listOrd, 'item'));
+                                    if( $indice !== false ) {
+                                        array_push($listOrd[$indice]['pessoas'], $registro['Nome']);
                                         $listOrd[$indice]['qtd'] += $registro['qtd'];
+                                    }
                                     else
-                                        array_push($listOrd, Array('item'=>$registro['Item'],'qtd'=>$registro['qtd'],'tipo'=>$registro['type']));
+                                        array_push($listOrd, Array('item'=>$registro['Item'],'qtd'=>$registro['qtd'],'tipo'=>$registro['type'],'pessoas'=>Array($registro['Nome'])));
                                 }
                             }
                         }
-                        foreach ($listOrd as $value) {
-                            echo '  <div class="ui horizontal statistic">
-                                      <div class="value">'.$value['qtd'].' '.$value['tipo'].'</div>
-                                      <div class="label">'.$value['item'].'</div>
-                                    </div><br>';
+
+                        // Insere os itens que ninguem selecionou
+                        foreach ($item->loadItens() as $value) {
+                            $indice = array_search($value['Item'], array_column($listOrd, 'item'));
+                            if( $indice === false )
+                                array_push($listOrd, Array('item'=>$value['Item'],'qtd'=>'0','tipo'=>$value['Tipo']));
+                        }
+
+                        // cria os itens que vão entrar no container
+                        function createItem( $key, $item ) {
+                            $popup = implode(' | ', $item['pessoas']);
+                            $number = '';
+                            if( $item['qtd'] != '' )
+                                $number = '<div class="ui circular horizontal label">'.$item['qtd'].$item['tipo'].'</div>';
+                            return '<a data-html="'.$popup.'" href="index.php?key='.$key.'&item='.urlencode($item['nome']).'" class="item popup">'.$number.$item['nome'].'</a>';
+                        }
+
+                        // Cria o container com o tipo e os itens de cada tipo
+                        function createContainer( $container ) {
+                            return '<div class="column"><div class="ui raised segment"><a class="ui '.$container['color'].' ribbon label">'.$container['nome'].'</a>
+                                    <div class="ui selection list">'.$container['itens'].'<div class="ui divider"></div>'.$container['itensNull'].'</div></div></div>';
+                        }
+
+                        // Cria o container com os itens separados por tipo
+                        $arrContainer = null;
+                        foreach ($tipo->loadTipos() as $itemTipo) {
+                            $arrItem = null;
+                            $arrItemNull = null;
+                            foreach( $listOrd as $item ) {
+                                if( $item['tipo'] == strtolower($itemTipo['type']) && $item['qtd'] != '0' )
+                                    $arrItem .= createItem( $listKey, Array('nome'=>$item['item'],'qtd'=>$item['qtd'],'tipo'=>$itemTipo['type'],'pessoas'=>$item['pessoas']) );
+                                elseif( $item['tipo'] == strtolower($itemTipo['type']) && $item['qtd'] == '0' )
+                                    $arrItemNull .= createItem( $listKey, Array('nome'=>$item['item'],'tipo'=>$itemTipo['type']) );
+                            }
+                            $arrContainer .= createContainer( Array('color'=>'red','nome'=>$itemTipo['nome'],'itens'=>$arrItem,'itensNull'=>$arrItemNull) );
                         }
                     }
                 ?>
 
-
-                <div class="ui divider"></div>
-                <div class="label">Listas</div>
-                <div class="ui list">
+                
+            <div class="ui grid">
+                <div class="four wide column">
+                <div class="header">Listas</div>
+                    <div class="ui secondary vertical pointing menu">
                     <?php 
 
-                        foreach ($script->getList() as $value) {
-                            echo '  <div class="item">
-                                        <i class="file text outline icon"></i>
-                                        <div class="content">
-                                            <a href="?list='.$value['Data'].'">'.$value['Data'].'</a>
-                                        </div>
-                                    </div>';
-                        }
-
+                    foreach ($script->getList() as $value) {
+                        $active = '';
+                        if( $_GET['list'] == $value['Data'] )
+                            $active = 'active';
+                        echo '<a class="item '.$active.'" href="?list='.$value['Data'].'">'.$value['Data'].'</a>';
+                    }
                     ?>
+                    </div>
                 </div>
+                <div class="twelve wide column">
+                    <div class="header"><?php echo $_GET['list']; ?></div>
+                    <br>
+                    <div class="ui three column grid">
+                            <?php echo $arrContainer; ?>
+                    </div>                
+                </div>
+            </div>
         </div>
     </div>
 
