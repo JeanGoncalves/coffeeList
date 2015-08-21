@@ -24,60 +24,67 @@
         <div class="ui message">
             <p>
                 Na empresa Softers | AgênciaSys, toda a sexta-feira é iniciada com um belo café corporativo, onde todos ajudam comprando os itens que compôem este café.
-                E funcionava com uma lista de papel sendo passada por cada funcionário todo dia anterior. Visando a economia de papel e a melhor elaboração do café, foi criada a idéia de 
-                ter um sistema capaz de fazer.
+                E funcionava com uma lista de papel sendo passada por cada funcionário todo dia anterior. Visando a economia de papel e a melhor elaboração do café, foi elaborada a idéia de 
+                ter um sistema capaz de resolver esse problema. E assim surgiu o CoffeeList.
             </p>
-            <div class="ui special cards">
-              <div class="card">
-                <div class="blurring dimmable image">
-                  <div class="ui dimmer">
-                    <div class="content">
-                      <div class="center">
-                        <div class="ui inverted button">Add Friend</div>
-                      </div>
-                    </div>
-                  </div>
-                  <img src="/images/avatar/large/elliot.jpg">
-                </div>
-                <div class="content">
-                  <a class="header">Team Fu</a>
-                  <div class="meta">
-                    <span class="date">Create in Sep 2014</span>
-                  </div>
-                </div>
-                <div class="extra content">
-                  <a>
-                    <i class="users icon"></i>
-                    2 Members
-                  </a>
-                </div>
-              </div>
-              <div class="card">
-                <div class="blurring dimmable image">
-                  <div class="ui inverted dimmer">
-                    <div class="content">
-                      <div class="center">
-                        <div class="ui primary button">Add Friend</div>
-                      </div>
-                    </div>
-                  </div>
-                  <img src="/images/avatar/large/jenny.jpg">
-                </div>
-                <div class="content">
-                  <a class="header">Team Hess</a>
-                  <div class="meta">
-                    <span class="date">Create in Aug 2014</span>
-                  </div>
-                </div>
-                <div class="extra content">
-                  <a>
-                    <i class="users icon"></i>
-                    2 Members
-                  </a>
-                </div>
-              </div>
-            </div>
         </div>
+
+
+        <div>
+          <div class="ui message">
+          <div class="header">Iniciativa de:</div>
+          <p>
+          <div class="ui cards">
+
+            <div class="card">
+              <div class="content">
+                <img class="left floated tiny ui rounded image" src="https://media.licdn.com/media/p/7/000/26e/0a5/2dc4526.jpg">
+                <div class="header">Jean Gonçalves</div>
+                <div class="meta">Softers | Agênciasys</div>
+                <div class="description">
+                  Desenvolvedor Front-end
+                </div>
+              </div>
+              <div class="extra content">
+                <a href="https://www.facebook.com/1jeangoncalves" class="ui circular facebook icon button">
+                  <i class="facebook icon"></i>
+                </a>
+                <a href="https://github.com/JeanGoncalves" class="ui circular black icon button">
+                  <i class="github alternate icon"></i>
+                </a>
+                <a href="https://br.linkedin.com/in/jeangoncalves" class="ui circular linkedin icon button">
+                  <i class="linkedin icon"></i>
+                </a>
+                </div>
+            </div>
+
+            <div class="card">
+              <div class="content">
+                <img class="left floated tiny ui rounded image" src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/1/005/00c/2bb/19b799d.jpg">
+                <div class="header">Diogo Cavilha</div>
+                <div class="meta">Softers | Agênciasys</div>
+                <div class="description">
+                  Desenvolvedor Back-end
+                </div>
+              </div>
+              <div class="extra content">
+                <a href="https://www.facebook.com/diogocavilha" class="ui circular facebook icon button">
+                  <i class="facebook icon"></i>
+                </a>
+                <a href="https://github.com/diogocavilha" class="ui circular black icon button">
+                  <i class="github alternate icon"></i>
+                </a>
+                <a href="https://br.linkedin.com/in/diogocavilha" class="ui circular linkedin icon button">
+                  <i class="linkedin icon"></i>
+                </a>
+                </div>
+            </div>
+
+          </div>
+          </p>
+          </div>
+        </div>
+
     </div>
 
 
