@@ -77,6 +77,9 @@
                 <a href="https://br.linkedin.com/in/diogocavilha" class="ui circular linkedin icon button">
                   <i class="linkedin icon"></i>
                 </a>
+                <a href="https://bitbucket.org/diogocavilha" class="ui circular blue icon button">
+                  <i class="bitbucket icon"></i>
+                </a>
                 </div>
             </div>
 
