@@ -1,10 +1,20 @@
 <?php 
 
+
 /**
 * Helper
 */
 class Helper
 {
+
+    function __construct()
+    {
+        if( $_GET['d'] ) {
+            error_reporting(E_ALL|E_STRICT);
+            ini_set('display_errors', 1);
+        }
+
+    }
     public function varDump( $obj ) {
         echo '<div class="ui red message">';
         echo '<pre>'.print_r($obj,1).'</pre>';

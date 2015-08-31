@@ -38,7 +38,6 @@ class Header
         echo '<script type="text/javascript" src="maskedinput/jquery.maskedinput.min.js"></script>';
     }
 
-
     private function getSemanticUi() {
         echo '<link rel="stylesheet" type="text/css" href="Semantic-UI/dist/semantic.min.css">';
         echo '<script src="Semantic-UI/dist/semantic.min.js"></script>';

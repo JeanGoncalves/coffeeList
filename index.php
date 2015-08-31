@@ -1,8 +1,8 @@
 <?php  
-	include_once 'class/action.class.php';
     include_once 'class/header.class.php';
     include_once 'class/menu.class.php';
-
+	include_once 'class/action.class.php';
+	
 	$key = null;
 	if( isset($_GET['key']) )
 		$key = $_GET['key'];

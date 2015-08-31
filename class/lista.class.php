@@ -1,8 +1,6 @@
 <?php 
-// echo '<pre>'.print_r($_SERVER,1).'</pre>';
-require 'helper.class.php';
-require '../mongo/conection.class.php';
 
+require_once 'helper.class.php';
 
 class Action extends Helper
 {		
@@ -12,17 +10,12 @@ class Action extends Helper
 	private $urlIndex = "../index.php";
 	private $urlList = "../list.php";
 
-	private $connection;
-
 	function __construct() {
 		$this->dateNow = date('Y-m-d');
-
-		$this->connection = new Connection('coffeelist','lista');
 	}
 
 	public function loadList( $vKey ) {
-		$read = $this->connection->getAll();
-		// $read = parent::ManipulateArchive($this->list,'r');
+		$read = parent::ManipulateArchive($this->list,'r');
 		if( isset( $vKey ) )
 			$key = $vKey;
 		else
@@ -36,13 +29,12 @@ class Action extends Helper
 	}
 
 	public function createList( $date ) {
-		// $lista = parent::ManipulateArchive($this->list, 'r');
-		// $key = count($lista);
+		$lista = parent::ManipulateArchive($this->list, 'r');
+		$key = count($lista);
 		$obj = Array('Data'=>$date, 'lista'=> Array());
-		$this->connection->insert( $date );
-		// array_push( $lista, $obj );
-		// $lista = json_encode($lista,JSON_UNESCAPED_SLASHES);
-			// $lista = parent::ManipulateArchive($this->list, 'w', $lista);
+		array_push( $lista, $obj );
+		$lista = json_encode($lista,JSON_UNESCAPED_SLASHES);
+		$lista = parent::ManipulateArchive($this->list, 'w', $lista);
 		header("location:{$this->urlIndex}?key=".$key);
 
 	}
@@ -59,15 +51,13 @@ class Action extends Helper
 	}
 
 	public function getLists() {
-		$read = $this->connection->getAll();
-		return $read;
-		// $response = Array();
-		// $lists = parent::ManipulateArchive($this->list,'r');
-		// foreach ($lists as $key => $value) {
-		// 	$obj = Array('key'=> $key,'data'=>$value[Data], 'qtd'=>count($value[lista]));
-		// 	array_push($response, $obj);
-		// }
-		// return $response;
+		$response = Array();
+		$lists = parent::ManipulateArchive($this->list,'r');
+		foreach ($lists as $key => $value) {
+			$obj = Array('key'=> $key,'data'=>$value[Data], 'qtd'=>count($value[lista]));
+			array_push($response, $obj);
+		}
+		return $response;
 	}
 
 	public function getDate( $vKey ) {
@@ -75,8 +65,8 @@ class Action extends Helper
 		if( isset( $vKey ) )
 			$key = $vKey;
 		else
-			$key = self::nextList( $read, $vKey );
-		return Array('date'=>$read[$key]['Data'],'key'=>$key);
+			$key = self::nextList( $read, $key );
+		return Array('date'=>$read[$key][Data],'key'=>$key);
 	}
 
 	public function editList( $vKey, $obj ) {
@@ -85,7 +75,7 @@ class Action extends Helper
 			$key = $vKey;
 		else
 			$key = self::nextList( $lista, $key );
-		array_push($lista[$key]['lista'],$obj);
+		array_push($lista[$key][lista],$obj);
 		$lista = json_encode($lista,JSON_UNESCAPED_SLASHES);
 		$lista = parent::ManipulateArchive($this->list, 'w', $lista);
 		header("location:{$this->urlIndex}?key=".$key);
@@ -135,7 +125,7 @@ class Action extends Helper
 
 	private function nextList( $obj, $vKey ) {
 		foreach ($obj as $key => $list) {
-			$data = explode('/',$list['Data']);
+			$data = explode('/',$list[Data]);
 			$data = $data[2].'-'.$data[1].'-'.$data[0];
 			if( self::compareDate( $this->dateNow, $data ) )
 				return $key;
