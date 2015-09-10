@@ -8,8 +8,9 @@
 		if( $_POST['tipo'] == 'add' ) {
 			$nome = $_POST['nome'];
 			$type = $_POST['type'];
+			$minimo = $_POST['minimo'];
 
-			$item->addItem( $nome, $type );
+			$item->addItem( $nome, $type, $minimo );
 		} else if( $_POST['tipo'] == 'del' ) {
 			$key = $_POST['key'];
 

@@ -23,10 +23,14 @@
         <form class="ui form attached fluid segment" action="action/action.item.php" method="POST">
             <input type="hidden" name="tipo" value="add">
             <div class="field">
-                <div class="two fields">
+                <div class="three fields">
                     <div class="field">
                         <label>Item</label>
                         <input name="nome" autofocus placeholder="Insira o Item" class="validate" data-error="Insira um item." type="text">
+                    </div>
+                    <div class="one wide field">
+                        <label>Mínimo</label>
+                        <input name="minimo" autofocus type="text">
                     </div>
                     <div class="field">
                         <?php 
@@ -66,7 +70,8 @@
                 <thead>
                     <tr>
                         <th class="thirteen wide">Ítem</th>
-                        <th class="two wide">Tipo</th>
+                        <th class="two wide">Mínimo</th>
+                        <th class="three wide">Tipo</th>
                         <th class="two wide"></th>
                     </tr>
                 </thead>
@@ -81,6 +86,7 @@
                     foreach ($item as $key => $value) {
                         echo "  <tr>
                                     <td>{$value['Item']}</td>
+                                    <td>{$value['Minimo']}</td>
                                     <td>{$value['Tipo']}</td>
                                     <td>
                                         <form action=\"action/action.item.php\" method=\"POST\">

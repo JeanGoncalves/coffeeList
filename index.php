@@ -66,7 +66,7 @@
 												$select = '';
 												if( $item == $value['Item'] )
 													$select = 'active selected';
-												echo "<div class='item $selected' id='{$value['Tipo']}' data-value='{$value['Item']}'>";
+												echo "<div class='item $selected' id='{$value['Tipo']}' data-min='{$value['Minimo']}' data-value='{$value['Item']}'>";
 												echo "<span class='text'>{$value['Item']}</span>";
 												$names = $list->getNameItem( $key, $value['Item'] );
 												foreach ($names as $name) {
@@ -91,7 +91,7 @@
 								?>
 								<label>Quantidade</label>
 								<div class="ui right labeled input" id="labelQtd">
-									<input name="qtd" type="text" id="inputQtd" class="inputQtd validate" data-error="Insira a quantidade." disabled>
+									<input name="qtd" type="number" id="inputQtd" class="inputQtd validate" data-error="Insira a quantidade." disabled>
 									<input type="hidden" class="type" name="type">
 									<div class="ui label"></div>
 								</div>
@@ -120,8 +120,8 @@
 			<table class="ui blue striped table">
 				<thead>
 				    <tr>
-				    	<th class="six wide">Nome</th>
-				    	<th class="ten wide">Ítem</th>
+				    	<th class="six wide">Nomeeee<i class="sort descending icon"></i></th>
+				    	<th class="ten wide">Ítem<i class="sort descending icon"></i></th>
 				    	<th class="two wide"></th>
 					</tr>
 				</thead>

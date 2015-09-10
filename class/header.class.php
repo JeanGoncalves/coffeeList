@@ -13,6 +13,7 @@ class Header
         self::getMaskedin();
         self::getSemanticUi();
         self::getValidation();
+        self::getStyle();
 
         if( $type == 'Início' )
             self::getInicio();
@@ -50,5 +51,9 @@ class Header
 
     private function getInicio() {
         echo '<script type="text/javascript" src="js/index.js"></script>';
+    }
+
+    private function getStyle() {
+        echo '<link rel="stylesheet" type="text/css" href="css/style.css">';
     }
 }

@@ -21,9 +21,9 @@ class Item extends Helper
 		}
 	}
 
-	public function addItem( $nome, $type ) {
+	public function addItem( $nome, $type, $minimo ) {
 		$itens = parent::ManipulateArchive($this->arq, 'r');
-		array_push($itens, Array('Item'=>$nome, 'Tipo'=>$type));
+		array_push($itens, Array('Item'=>$nome, 'Tipo'=>$type, 'Minimo'=>$minimo));
 		$itens = json_encode($itens,JSON_UNESCAPED_SLASHES);
 		parent::ManipulateArchive($this->arq, 'w', $itens);
 		header('location:'.$this->urlItem);
