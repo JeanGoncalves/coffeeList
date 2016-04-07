@@ -1,4 +1,9 @@
-<?php  
+<?php
+
+	ini_set('display_errors', 1);
+	error_reporting(-1);
+
+
 	include_once 'class/action.class.php';
     include_once 'class/header.class.php';
     include_once 'class/menu.class.php';
@@ -48,14 +53,14 @@
 					<div class="field">
 						<div class="ui grid">
 							<div class="twelve field wide column">
-								
+
 								<label>Ítem</label>
 								<div class="ui selection search dropdown">
 									<input name="item" type="hidden" class="validate" data-error="Selecione um item." id="item" value="<?php echo $item; ?>">
 									<i class="dropdown icon"></i>
 									<div class="default text">Selecione</div>
 									<div class="menu">
-										<?php 
+										<?php
 
 											include "class/item.class.php";
 
@@ -64,25 +69,26 @@
 											$item = $itens->loadItens();
 											foreach ($item as $value) {
 												$select = '';
-												if( $item == $value['Item'] )
+												if( $item == $value['Item'] ) {
 													$select = 'active selected';
-												echo "<div class='item $selected' id='{$value['Tipo']}' data-min='{$value['Minimo']}' data-value='{$value['Item']}'>";
+												}
+												echo "<div class='item ". $select. "' id='{$value['Tipo']}' data-min='{$value['Minimo']}' data-value='{$value['Item']}'>";
 												echo "<span class='text'>{$value['Item']}</span>";
 												$names = $list->getNameItem( $key, $value['Item'] );
 												foreach ($names as $name) {
 													echo "<span class='description'>{$name}</span>";
 												}
 												echo "</div>";
-												
+
 											}
-											
+
 										?>
 								  	</div>
 								</div>
 							</div>
 							<div class="four wide field column disabled" id="componentQtd">
-								
-								<?php 
+
+								<?php
 
 									include 'class/tipo.class.php';
 
@@ -120,13 +126,13 @@
 			<table class="ui blue striped table">
 				<thead>
 				    <tr>
-				    	<th class="six wide">Nomeeee<i class="sort descending icon"></i></th>
-				    	<th class="ten wide">Ítem<i class="sort descending icon"></i></th>
+				    	<th class="six wide">Nome</th>
+				    	<th class="ten wide">Ítem</th>
 				    	<th class="two wide"></th>
 					</tr>
 				</thead>
 				<tbody>
-				<?php 
+				<?php
 
 					$list = $action->loadList( $key );
 					foreach ($list as $reg => $value) {

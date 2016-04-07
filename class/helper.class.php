@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
 * Helper
@@ -20,8 +20,7 @@ class Helper
      */
     public function ManipulateArchive( $archive, $type, $string = null ) {
 
-        header ('Content-type: text/html; charset=UTF-8');
-        $read = null;
+        $read = array();
         if( file_exists('archives/') ) {
             if( !file_exists($archive) ) {
                 self::createArchive($archive);
@@ -37,7 +36,7 @@ class Helper
     	$list = fopen( $archive,$type ) or die( "Não foi possivel carregar o arquivo <strong>$archive</strong>. Tipo: <strong>$type</strong>" );
 
     	if( $type == 'r' ) {
-			$read = fread( $list, filesize( $archive ) );
+			$read = fread( $list, is_readable( $archive ) );
 			$read = json_decode( $read,1 );
     	}
 		elseif( $type == 'w' ) {
