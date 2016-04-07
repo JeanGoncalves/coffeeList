@@ -1,4 +1,7 @@
 <?php 
+
+    error_reporting(0);
+
     include_once 'class/header.class.php';
     include_once 'class/menu.class.php';
     include_once 'class/script.class.php';

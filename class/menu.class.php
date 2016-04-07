@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
 * Menu
@@ -17,7 +17,7 @@ class Menu
                         Array('nome'=>'sugestoes','title'=>'Sugestões','href'=>'suggestion.php'),
                         Array('nome'=>'sobre','title'=>'Sobre','href'=>'sobre.php','align'=>'right')
                         );
-    
+
     private $title;
     private $menuLeft;
     private $menuRight;
@@ -53,7 +53,7 @@ class Menu
             $active = '';
             if( $value['nome'] == $this->title )
                 $active = ' active';
-            if( $value['align'] == 'right' )
+            if( isset($value['align']) && $value['align'] == 'right' )
                 $this->menuRight .= '<a href="'.$value['href'].'" class="item'.$active.'">'.$value['title'].'</a>';
             else {
                 if( isset($value['dropdown']) ) {

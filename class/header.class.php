@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
 * Header
@@ -24,7 +24,7 @@ class Header
     }
 
     private function getCharset() {
-        echo '<meta charset="utf-8">';
+        echo '<meta Content-type: text/html; charset="utf-8">';
     }
 
     private function getMobileView() {
