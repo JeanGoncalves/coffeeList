@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 require_once 'helper.class.php';
 require_once 'item.class.php';
@@ -8,7 +8,7 @@ require_once 'item.class.php';
 */
 class Script extends Helper
 {
-    
+
     private $lista = array();
     private $archives = array(
                             'lista' => 'archives/arquivo.list'
@@ -19,17 +19,17 @@ class Script extends Helper
         $this->lista = parent::ManipulateArchive($this->archives['lista'], 'r');
     }
 
-    public function getList($param)
+    public function getList($param = null)
     {
         $list = $this->lista;
         switch ($param) {
             case 'count':
-                    return self::Count($list);
+                return self::Count($list);
                 break;
             case 'indices':
-                    return self::Indices($list[0]);
+                return self::Indices($list[0]);
             default:
-                    return $list;
+                return $list;
                 break;
         }
     }
@@ -81,7 +81,7 @@ class Script extends Helper
     public function getMediaItem($item)
     {
         $itens = self::getItens();
-        
+
         $response = array();
         foreach ($itens as $key => $value) {
             $key = self::array_verify($value['item'], $response);

@@ -81,6 +81,30 @@ include_once 'class/menu.class.php';
                             </div>
                             <div class="card">
                                 <div class="content">
+                                    <img class="left floated tiny ui rounded image" src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/1/005/00c/2bb/19b799d.jpg">
+                                    <div class="header">Otávio Augusto</div>
+                                    <div class="meta">Softers | Agênciasys</div>
+                                    <div class="description">
+                                        Desenvolvedor Back-end
+                                    </div>
+                                </div>
+                                <div class="extra content">
+                                    <a href="https://www.facebook.com/otaavioo" class="ui circular facebook icon button">
+                                        <i class="facebook icon"></i>
+                                    </a>
+                                    <a href="https://github.com/otaavioo" class="ui circular black icon button">
+                                        <i class="github alternate icon"></i>
+                                    </a>
+                                    <a href="https://br.linkedin.com/in/otaavioo" class="ui circular linkedin icon button">
+                                        <i class="linkedin icon"></i>
+                                    </a>
+                                    <a href="https://bitbucket.org/otaavioo" class="ui circular blue icon button">
+                                        <i class="bitbucket icon"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="content">
                                     <img class="left floated tiny ui rounded image" src="https://media.licdn.com/media/AAEAAQAAAAAAAAPBAAAAJGQwNzM4YTdkLWI4ODgtNDE1Zi1hMTA4LTc0MzI2ZGU4ZTQxZg.jpg">
                                     <div class="header">Carlos Paulischen</div>
                                     <div class="meta">Softers | Agênciasys</div>
