@@ -1,7 +1,7 @@
 
-<?php 
+<?php
 
-    require_once 'helper.class.php';
+require_once 'helper.class.php';
 
 /**
 * Sugestões
@@ -56,5 +56,3 @@ class Sugestao extends Helper
         header('location:'.$this->urlItem);
     }
 }
-
-?>
