@@ -9,16 +9,18 @@ require_once 'item.class.php';
 class Script extends Helper
 {
     
-    private $lista = Array();
-    private $archives = Array(
+    private $lista = array();
+    private $archives = array(
                             'lista' => 'archives/arquivo.list'
                         );
 
-    function __construct() {
-        $this->lista = parent::ManipulateArchive($this->archives['lista'],'r');
+    public function __construct()
+    {
+        $this->lista = parent::ManipulateArchive($this->archives['lista'], 'r');
     }
 
-    public function getList( $param ) {
+    public function getList($param)
+    {
         $list = $this->lista;
         switch ($param) {
             case 'count':
@@ -32,94 +34,102 @@ class Script extends Helper
         }
     }
 
-    private function Count($arr) {
+    private function Count($arr)
+    {
         return count($arr);
     }
 
-    private function Indices($arr) {
+    private function Indices($arr)
+    {
         return array_keys($arr);
     }
 
-    private function getItens() {
-
-        $response = Array();
+    private function getItens()
+    {
+        $response = array();
         foreach ($this->lista as $key => $value) {
             foreach ($value['lista'] as $item) {
-                array_push($response,Array('item' => $item['Item'], 'quantidade'=> $item['qtd'], 'lista'=>$key));
+                array_push($response, array('item' => $item['Item'], 'quantidade'=> $item['qtd'], 'lista'=>$key));
             }
         }
         return $response;
     }
 
-    public function getQtdList( $data, $item ) {
+    public function getQtdList($data, $item)
+    {
         $lista = $this->lista;
         $keyList = -1;
         $cont = 0;
         foreach ($lista as $key => $list) {
-            if( $list['Data'] == $data )
+            if ($list['Data'] == $data) {
                 $keyList = $key;
+            }
         }
 
-        if( $keyList == -1 )
+        if ($keyList == -1) {
             return 0;
-        else{
+        } else {
             foreach ($lista[$keyList]['lista'] as $value) {
-                if( $value['Item'] == $item )
+                if ($value['Item'] == $item) {
                     $cont = $value['qtd'] + $cont;
+                }
             }
             return $cont;
         }
-
     }
 
-    public function getMediaItem( $item ) {
+    public function getMediaItem($item)
+    {
         $itens = self::getItens();
         
-        $response = Array();
+        $response = array();
         foreach ($itens as $key => $value) {
             $key = self::array_verify($value['item'], $response);
-            if( $key != -1 ){
+            if ($key != -1) {
                 $response[$key]['qtd'] = $response[$key]['qtd'] + 1;
                 $response[$key]['sum'] = $response[$key]['sum'] + $value['quantidade'];
                 $response[$key]['med'] = floor($response[$key]['sum'] / $response[$key]['qtd']);
+            } else {
+                $response[] = array('item'=>$value['item'],'sum'=>$value['quantidade'],'qtd'=>1,'med'=>$value['quantidade']);
             }
-            else
-                $response[] = Array('item'=>$value['item'],'sum'=>$value['quantidade'],'qtd'=>1,'med'=>$value['quantidade']);
         }
 
         foreach ($response as $key => $value) {
-            if( $value['item'] == $item )
+            if ($value['item'] == $item) {
                 return $response[$key];
+            }
         }
         return null;
     }
 
-    private function array_verify( $val, $array ) {
+    private function array_verify($val, $array)
+    {
         foreach ($array as $key => $value) {
-            if( $value['item'] == $val )
+            if ($value['item'] == $val) {
                 return $key;
+            }
         }
         return -1;
     }
 
-    public function randomItem( $data ) {
-        while($data) {
+    public function randomItem($data)
+    {
+        while ($data) {
             $item = new Item;
             $item = $item->loadItens();
-            $response = Array();
+            $response = array();
             foreach ($item as $value) {
-                array_push($response,$value["Item"]);
+                array_push($response, $value["Item"]);
             }
             $cont = count($response)-1;
-            $select = $response[rand(0,$cont)];
+            $select = $response[rand(0, $cont)];
             $media = self::getMediaItem($select);
-            $qtdList = self::getQtdList( $data, $select );
-            if( $media['med'] > $qtdList )
+            $qtdList = self::getQtdList($data, $select);
+            if ($media['med'] > $qtdList) {
                 return $select;
-            else if( empty($media) && $qtdList == 0 )
+            } elseif (empty($media) && $qtdList == 0) {
                 return $select;
+            }
         }
     }
 }
-
-?>

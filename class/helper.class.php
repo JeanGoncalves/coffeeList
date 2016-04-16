@@ -5,9 +5,10 @@
 */
 class Helper
 {
-    public function varDump( $obj ) {
+    public function varDump($obj)
+    {
         echo '<div class="ui red message">';
-        echo '<pre>'.print_r($obj,1).'</pre>';
+        echo '<pre>'.print_r($obj, 1).'</pre>';
         echo '</div>';
         die('<hr>Finish Vardump');
     }
@@ -18,47 +19,45 @@ class Helper
      * @param STRING $type    Tipo de manipulação do arquivo.(r,w)
      * @param STRING $string  Caso seja tipo w(escrita) o que vier dessa variável que será escrito no arquivo
      */
-    public function ManipulateArchive( $archive, $type, $string = null ) {
-
+    public function ManipulateArchive($archive, $type, $string = null)
+    {
         $read = array();
-        if( file_exists('archives/') ) {
-            if( !file_exists($archive) ) {
+        if (file_exists('archives/')) {
+            if (!file_exists($archive)) {
+                self::createArchive($archive);
+            }
+        } elseif (file_exists('../archives/')) {
+            $archive = '../'.$archive;
+            if (!file_exists($archive)) {
                 self::createArchive($archive);
             }
         }
-        elseif( file_exists('../archives/') ){
-            $archive = '../'.$archive;
-            if( !file_exists($archive) ) {
-                self::createArchive($archives);
-            }
+
+        $list = fopen($archive, $type) or die("Não foi possivel carregar o arquivo <strong>$archive</strong>. Tipo: <strong>$type</strong>");
+        if ($type == 'r') {
+            $read = fread($list, filesize($archive));
+            $read = json_decode($read, 1);
+        } elseif ($type == 'w') {
+            fwrite($list, $string);
         }
 
-    	$list = fopen( $archive,$type ) or die( "Não foi possivel carregar o arquivo <strong>$archive</strong>. Tipo: <strong>$type</strong>" );
-
-    	if( $type == 'r' ) {
-			$read = fread( $list, is_readable( $archive ) );
-			$read = json_decode( $read,1 );
-    	}
-		elseif( $type == 'w' ) {
-			fwrite($list, $string);
-		}
-
-		fclose($list);
-		return $read;
+        fclose($list);
+        return !empty($read) ? $read : [];
     }
 
-    private function createArchive( $archive ) {
-        $arq = fopen($archive,'x+');
-        fwrite($arq,'[]');
+    private function createArchive($archive)
+    {
+        $arq = fopen($archive, 'x+');
+        fwrite($arq, json_encode([]));
         fclose($arq);
     }
 
-    public function verifyAmbiance() {
+    public function verifyAmbiance()
+    {
         $response = false;
-        if( $_SERVER['HTTP_HOST'] == 'localhost' )
+        if ($_SERVER['HTTP_HOST'] == 'localhost') {
             $response = true;
+        }
         return $response;
     }
 }
-
-?>
