@@ -1,7 +1,4 @@
-<?php 
-
-    error_reporting(0);
-
+<?php
     include_once 'class/header.class.php';
     include_once 'class/menu.class.php';
     include_once 'class/script.class.php';
@@ -15,7 +12,7 @@
 </head>
 <body>
     <?php new Menu('relatorio'); ?>
-    
+
     <div class="ui container">
         <div class="ui icon attached message">
             <i class="file text outline icon"></i>
@@ -27,7 +24,7 @@
             </div>
         </div>
 
-        <?php 
+        <?php
 
             $script = new Script;
             $tipo = new Tipo;
@@ -37,7 +34,7 @@
         ?>
 
         <div class="ui message">
-                <?php 
+                <?php
 
 
                     if( $_GET ) {
@@ -98,12 +95,12 @@
                     }
                 ?>
 
-                
+
             <div class="ui grid">
                 <div class="four wide column">
                 <div class="header">Listas</div>
                     <div class="ui secondary vertical pointing menu">
-                    <?php 
+                    <?php
 
                     foreach ($script->getList() as $value) {
                         $active = '';
@@ -119,7 +116,7 @@
                     <br>
                     <div class="ui three column grid">
                             <?php echo $arrContainer; ?>
-                    </div>                
+                    </div>
                 </div>
             </div>
         </div>

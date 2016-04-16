@@ -1,7 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-error_reporting(-1);
-
 include_once 'class/action.class.php';
 include_once 'class/header.class.php';
 include_once 'class/menu.class.php';

@@ -1,7 +1,4 @@
-<?php 
-
-    error_reporting(0);
-
+<?php
     include_once 'class/header.class.php';
     include_once 'class/menu.class.php';
 ?>
@@ -52,7 +49,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                <?php 
+                <?php
 
                     include 'class/action.class.php';
 

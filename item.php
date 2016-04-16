@@ -1,7 +1,4 @@
-<?php 
-
-    error_reporting(0);
-
+<?php
     include_once 'class/header.class.php';
     include_once 'class/menu.class.php';
 ?>
@@ -12,7 +9,7 @@
 </head>
 <body>
     <?php new Menu('item'); ?>
-    
+
     <div class="ui container">
         <div class="ui icon attached message">
             <i class="file text outline icon"></i>
@@ -36,7 +33,7 @@
                         <input name="minimo" autofocus type="text">
                     </div>
                     <div class="field">
-                        <?php 
+                        <?php
 
                             include 'class/tipo.class.php';
 
@@ -48,7 +45,7 @@
                           <input type="hidden" value="<?= $first ?>" name="type">
                           <span class="text"><?= $first ?></span>
                           <div class="menu">
-                            <?php 
+                            <?php
 
                                 $arr = $tipos->loadTipos();
                                 foreach ($arr as $value) {
@@ -79,7 +76,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                <?php 
+                <?php
 
                     include "class/item.class.php";
 
