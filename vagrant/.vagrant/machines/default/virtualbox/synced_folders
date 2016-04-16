@@ -1,0 +1,1 @@
+{"virtualbox":{"/www":{"guestpath":"/www","hostpath":"/www","disabled":false,"__vagrantfile":true},"/temp":{"guestpath":"/temp","hostpath":"/www/coffeeList/vagrant","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"/www/coffeeList/vagrant","disabled":false,"__vagrantfile":true}}}
