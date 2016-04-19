@@ -1,7 +1,7 @@
 ---
     ip: 192.168.2.2
     box: coffee-list
-    name: coffee-list-01-dev
+    name: coffee-list-02-dev
     hostname: vm.local
     provider: virtualbox
     ram: 512

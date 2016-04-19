@@ -81,7 +81,7 @@ include_once 'class/menu.class.php';
                             </div>
                             <div class="card">
                                 <div class="content">
-                                    <img class="left floated tiny ui rounded image" src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/1/005/00c/2bb/19b799d.jpg">
+                                    <img class="left floated tiny ui rounded image" src="https://pt.gravatar.com/userimage/103143658/abe48e41565d01795c10af6fba65d29c.jpg?size=200">
                                     <div class="header">Otávio Augusto</div>
                                     <div class="meta">Softers | Agênciasys</div>
                                     <div class="description">
@@ -95,7 +95,7 @@ include_once 'class/menu.class.php';
                                     <a href="https://github.com/otaavioo" class="ui circular black icon button">
                                         <i class="github alternate icon"></i>
                                     </a>
-                                    <a href="https://br.linkedin.com/in/otaavioo" class="ui circular linkedin icon button">
+                                    <a href="https://br.linkedin.com/in/otaviobpinto" class="ui circular linkedin icon button">
                                         <i class="linkedin icon"></i>
                                     </a>
                                     <a href="https://bitbucket.org/otaavioo" class="ui circular blue icon button">
