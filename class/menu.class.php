@@ -6,35 +6,38 @@
 class Menu
 {
 
-    private $menus = Array(
-                        Array('nome'=>'inicio','title'=>'Início','href'=>'index.php'),
-                        Array('nome'=>'cadastro','title'=>'Cadastro','dropdown'=> Array(
-                            Array('nome'=>'lista','title'=>'Lista','href'=>'list.php'),
-                            Array('nome'=>'item','title'=>'Item','href'=>'item.php'),
-                            Array('nome'=>'tipo','title'=>'Tipo','href'=>'type.php'))
+    private $menus = array(
+                        array('nome'=>'inicio','title'=>'Início','href'=>'index.php'),
+                        array('nome'=>'cadastro','title'=>'Cadastro','dropdown'=> array(
+                            array('nome'=>'lista','title'=>'Lista','href'=>'list.php'),
+                            array('nome'=>'item','title'=>'Item','href'=>'item.php'),
+                            array('nome'=>'tipo','title'=>'Tipo','href'=>'type.php'))
                             ),
-                        Array('nome'=>'relatorio','title'=>'Relatório','href'=>'relatorio.php'),
-                        Array('nome'=>'sugestoes','title'=>'Sugestões','href'=>'suggestion.php'),
-                        Array('nome'=>'sobre','title'=>'Sobre','href'=>'sobre.php','align'=>'right')
+                        array('nome'=>'relatorio','title'=>'Relatório','href'=>'relatorio.php'),
+                        array('nome'=>'sugestoes','title'=>'Sugestões','href'=>'suggestion.php'),
+                        array('nome'=>'sobre','title'=>'Sobre','href'=>'sobre.php','align'=>'right')
                         );
 
     private $title;
     private $menuLeft;
     private $menuRight;
 
-    function __construct( $title ) {
+    public function __construct($title)
+    {
         $this->title = $title;
         self::init();
     }
 
-    private function init() {
+    private function init()
+    {
         echo '<div class="ui secondary pointing menu">';
         self::logo();
         self::menu();
         echo '</div>';
     }
 
-    private function logo() {
+    private function logo()
+    {
         echo '<div class="item">
                     <div class="ui relaxed divided list">
                         <div class="item">
@@ -48,15 +51,17 @@ class Menu
                 </div>';
     }
 
-    private function menu() {
+    private function menu()
+    {
         foreach ($this->menus as $value) {
             $active = '';
-            if( $value['nome'] == $this->title )
+            if ($value['nome'] == $this->title) {
                 $active = ' active';
-            if( isset($value['align']) && $value['align'] == 'right' )
+            }
+            if (isset($value['align']) && $value['align'] == 'right') {
                 $this->menuRight .= '<a href="'.$value['href'].'" class="item'.$active.'">'.$value['title'].'</a>';
-            else {
-                if( isset($value['dropdown']) ) {
+            } else {
+                if (isset($value['dropdown'])) {
                     $this->menuLeft .= '<div class="ui dropdown item">'.$value['title'].' <i class="dropdown icon"></i><div class="menu">';
                     foreach ($value['dropdown'] as $drop) {
                         $this->menuLeft .= '<a href="'.$drop['href'].'" class="item'.$active.'">'.$drop['title'].'</a>';

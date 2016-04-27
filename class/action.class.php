@@ -18,42 +18,42 @@ class Action extends Helper
     public function loadList($vKey)
     {
         $read = parent::ManipulateArchive($this->list, 'r');
-        if(isset($vKey)) {
+        if (isset($vKey)) {
             $key = $vKey;
         } else {
-            $key = self::nextList( $read, $key );
+            $key = self::nextList($read, $key);
         }
-        if( $read == -1 ) {
+        if ($read == -1) {
             echo '<tr><td>Não tem lista futura.</td></tr>';
         }
-        $read = self::FirstLetter( $read[$vKey]['lista'] );
+        $read = self::FirstLetter($read[$vKey]['lista']);
         if (isset($list)) {
-            fclose( $list );
+            fclose($list);
         }
         asort($read);
         return $read;
     }
 
-    public function createList( $date )
+    public function createList($date)
     {
         $lista = parent::ManipulateArchive($this->list, 'r');
         $key = count($lista);
         $obj = array('Data'=>$date, 'lista'=> array());
-        array_push( $lista, $obj );
-        $lista = json_encode($lista,JSON_UNESCAPED_SLASHES);
+        array_push($lista, $obj);
+        $lista = json_encode($lista, JSON_UNESCAPED_SLASHES);
         $lista = parent::ManipulateArchive($this->list, 'w', $lista);
         header("location:{$this->urlIndex}?key=".$key);
-
     }
 
-    public function getNameItem( $vKey, $item )
+    public function getNameItem($vKey, $item)
     {
         $read = parent::ManipulateArchive($this->list, 'r');
-        $read = self::FirstLetter( $read[$vKey]['lista'] );
+        $read = self::FirstLetter($read[$vKey]['lista']);
         $response = array();
         foreach ($read as $value) {
-            if( strtoupper($item) == strtoupper($value['Item']) )
-                array_push($response,$value['Nome']);
+            if (strtoupper($item) == strtoupper($value['Item'])) {
+                array_push($response, $value['Nome']);
+            }
         }
         return $response;
     }
@@ -61,7 +61,7 @@ class Action extends Helper
     public function getLists()
     {
         $response = array();
-        $lists = parent::ManipulateArchive($this->list,'r');
+        $lists = parent::ManipulateArchive($this->list, 'r');
         foreach ($lists as $key => $value) {
             $obj = array('key'=> $key,'data'=>$value['Data'], 'qtd'=>count($value['lista']));
             array_push($response, $obj);
@@ -69,7 +69,20 @@ class Action extends Helper
         return $response;
     }
 
-    public function getDate( $vKey )
+    public function getDate($vKey)
+    {
+        $read = parent::ManipulateArchive($this->list, 'r');
+        if (!isset($vKey) || $vKey === '') {
+            $key = self::nextList($read);
+            $vKey = $key;
+        }
+        if (isset($vKey)) {
+            return array('date'=>$read[$vKey]['Data'],'key'=>$vKey);
+        }
+        return false;
+    }
+
+    /*public function getDate( $vKey )
     {
         $read = parent::ManipulateArchive($this->list,'r');
         if( isset( $vKey ) ) {
@@ -80,46 +93,47 @@ class Action extends Helper
             return array('date'=>$read[$vKey]['Data'],'key'=>$key);
         }
         return false;
-    }
+    }*/
 
-    public function editList( $vKey, $obj )
+    public function editList($vKey, $obj)
     {
-        $lista = parent::ManipulateArchive($this->list,'r');
-        if( isset( $vKey ) )
+        $lista = parent::ManipulateArchive($this->list, 'r');
+        if (isset($vKey)) {
             $key = $vKey;
-        else
-            $key = self::nextList( $lista, $key );
-        array_push($lista[$key]['lista'],$obj);
-        $lista = json_encode($lista,JSON_UNESCAPED_SLASHES);
+        } else {
+            $key = self::nextList($lista, $key);
+        }
+        array_push($lista[$key]['lista'], $obj);
+        $lista = json_encode($lista, JSON_UNESCAPED_SLASHES);
         $lista = parent::ManipulateArchive($this->list, 'w', $lista);
         header("location:{$this->urlIndex}?key=".$key);
     }
 
-    public function deleteKey( $vKey, $reg = null )
+    public function deleteKey($vKey, $reg = null)
     {
-        $lista = parent::ManipulateArchive($this->list,'r');
-        if( isset( $vKey ) )
+        $lista = parent::ManipulateArchive($this->list, 'r');
+        if (isset($vKey)) {
             $key = $vKey;
-        else
+        } else {
             die('É necessário inserir pelo menos a chave a ser deletada.');
+        }
 
         $i = 0;
-        if( !is_null($reg) ) {
-            unset( $lista[$vKey]['lista'][$reg] );
+        if (!is_null($reg)) {
+            unset($lista[$vKey]['lista'][$reg]);
             foreach ($lista[$vKey]['lista'] as $key => $value) {
-                if( $key > $i ) {
+                if ($key > $i) {
                     $lista[$vKey]['lista'][$i] = $value;
                     unset($lista[$vKey]['lista'][$key]);
                 }
                 $i++;
             }
             $url = $this->urlIndex."?key=".$vKey;
-        }
-        else {
+        } else {
             $cont = (count($lista) - 1);
-            unset( $lista[$vKey] );
-            foreach($lista as $key => $value) {
-                if( $key > $i ) {
+            unset($lista[$vKey]);
+            foreach ($lista as $key => $value) {
+                if ($key > $i) {
                     $lista[$i] = $value;
                     unset($lista[$key]);
                 }
@@ -127,50 +141,51 @@ class Action extends Helper
             }
             $url = $this->urlList;
         }
-        $lista = json_encode($lista,JSON_UNESCAPED_SLASHES);
+        $lista = json_encode($lista, JSON_UNESCAPED_SLASHES);
         $lista = parent::ManipulateArchive($this->list, 'w', $lista);
         header("location:".$url);
-
     }
 
     public function getColor()
     {
-        $color = array_rand($this->arrayColor,1);
+        $color = array_rand($this->arrayColor, 1);
         return $this->arrayColor[$color];
     }
 
-    private function nextList( $obj, $vKey )
+    private function nextList($obj, $vKey = null)
     {
         foreach ($obj as $key => $list) {
-            $data = explode('/',$list['Data']);
+            $data = explode('/', $list['Data']);
             $data = $data[2].'-'.$data[1].'-'.$data[0];
-            if( self::compareDate( $this->dateNow, $data ) )
+            if (self::compareDate($this->dateNow, $data)) {
                 return $key;
+            }
         }
-        return -1;
+
+        return $key;
     }
 
-    private function compareDate( $now, $date )
+    private function compareDate($now, $date)
     {
-        if(strtotime($now) > strtotime(date($date)))
+        if (strtotime($now) > strtotime(date($date))) {
             return 0;
-        elseif(strtotime($now) <= strtotime(date($date)))
+        } elseif (strtotime($now) <= strtotime(date($date))) {
             return 1;
+        }
     }
 
-    private function FirstLetter( $obj )
+    private function FirstLetter($obj)
     {
         foreach ($obj as $key => $value) {
             $sobrenome = '';
             $nome = explode(' ', $value['Nome']);
-            for($i = 1;$i <= count($nome)-1; $i++ )
+            for ($i = 1;$i <= count($nome)-1; $i++) {
                 $sobrenome .= $nome[$i].' ';
+            }
             $obj[$key]['Sobrenome'] = $sobrenome;
             $obj[$key]['Nome'] = $nome[0];
-            $obj[$key]['Letra'] = strtoupper(substr($value['Nome'],0,1));
+            $obj[$key]['Letra'] = strtoupper(substr($value['Nome'], 0, 1));
         }
         return $obj;
     }
 }
-
-?>

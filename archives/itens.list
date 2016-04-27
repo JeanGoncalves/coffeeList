@@ -1,11 +1,1 @@
-[{"Item":"Queijo"},
-{"Item":"Presunto"},
-{"Item":"Manteiga"},
-{"Item":"P\u00e3es(Franc\u00eas)"},
-{"Item":"P\u00e3o(Fatiado)"},
-{"Item":"Bolo"},
-{"Item":"Cuca"},
-{"Item":"Caf\u00e9"},
-{"Item":"Leite"},
-{"Item":"Bolacha"},
-{"Item":"Torrada"}]
+[{"Item":"Bolacha","Tipo":"pct","Minimo":"1"},{"Item":"Bolo","Tipo":"un","Minimo":"1"},{"Item":"Caf\u00e9","Tipo":"lt","Minimo":"1"},{"Item":"Cuca","Tipo":"un","Minimo":"1"},{"Item":"Leite","Tipo":"lt","Minimo":"2"},{"Item":"Manteiga","Tipo":"un","Minimo":"1"},{"Item":"Pote de Gel\u00e9ia","Tipo":"un","Minimo":"1"},{"Item":"Presunto","Tipo":"g","Minimo":"300"},{"Item":"P\u00e3o Fatiado","Tipo":"pct","Minimo":"1"},{"Item":"P\u00e3o Franc\u00eas","Tipo":"un","Minimo":"10"},{"Item":"Queijo","Tipo":"g","Minimo":"300"},{"Item":"Suco","Tipo":"lt","Minimo":"1"},{"Item":"Torrada","Tipo":"pct","Minimo":"1"},{"Item":"Ma\u00e7as","Tipo":"un","Minimo":"4"},{"Item":"Requeij\u00e3o","Tipo":"un","Minimo":"1"},{"Item":"Banana","Tipo":"un","Minimo":"10"},{"Item":"Torta","Tipo":"un","Minimo":"2"},{"Item":"P\u00e3o de Lingui\u00e7a","Tipo":"un","Minimo":"1"}]

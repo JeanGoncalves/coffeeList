@@ -1,2 +1,2 @@
-archives/*.list
-
+vagrant/.vagrant/
+*.sublime-workspace

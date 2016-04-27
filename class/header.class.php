@@ -5,8 +5,9 @@
 */
 class Header
 {
-    function __construct( $type ) {
-        self::setTitle( $type );
+    public function __construct($type)
+    {
+        self::setTitle($type);
         self::getCharset();
         self::getMobileView();
         self::getJquery();
@@ -15,45 +16,55 @@ class Header
         self::getValidation();
         self::getStyle();
 
-        if( $type == 'Início' )
+        if ($type == 'Início') {
             self::getInicio();
+        }
     }
 
-    private function setTitle( $title ) {
+    private function setTitle($title)
+    {
         echo "<title>$title | AgênciaSys</title>";
     }
 
-    private function getCharset() {
+    private function getCharset()
+    {
         echo '<meta Content-type: text/html; charset="utf-8">';
     }
 
-    private function getMobileView() {
+    private function getMobileView()
+    {
         echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
     }
 
-    private function getJquery() {
+    private function getJquery()
+    {
         echo '<script type="text/javascript" src="maskedinput/jquery-1.11.3.min.js"></script>';
     }
 
-    private function getMaskedin() {
+    private function getMaskedin()
+    {
         echo '<script type="text/javascript" src="maskedinput/jquery.maskedinput.min.js"></script>';
     }
 
 
-    private function getSemanticUi() {
+    private function getSemanticUi()
+    {
         echo '<link rel="stylesheet" type="text/css" href="Semantic-UI/dist/semantic.min.css">';
         echo '<script src="Semantic-UI/dist/semantic.min.js"></script>';
     }
 
-    private function getValidation() {
+    private function getValidation()
+    {
         echo '<script type="text/javascript" src="js/validation.js"></script>';
     }
 
-    private function getInicio() {
+    private function getInicio()
+    {
         echo '<script type="text/javascript" src="js/index.js"></script>';
     }
 
-    private function getStyle() {
+    private function getStyle()
+    {
         echo '<link rel="stylesheet" type="text/css" href="css/style.css">';
     }
 }
