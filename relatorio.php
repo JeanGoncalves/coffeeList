@@ -104,7 +104,7 @@
                     <div class="ui secondary vertical pointing menu">
                     <?php
 
-                    foreach ($script->getList() as $value) {
+                    foreach (array_reverse($script->getList()) as $value) {
                         $active = '';
                         if (isset($_GET['list']) && $_GET['list'] == $value['Data']) {
                             $active = 'active';

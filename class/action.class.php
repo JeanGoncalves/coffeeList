@@ -66,15 +66,14 @@ class Action extends Helper
             $obj = array('key'=> $key,'data'=>$value['Data'], 'qtd'=>count($value['lista']));
             array_push($response, $obj);
         }
-        return $response;
+        return array_reverse($response);
     }
 
     public function getDate($vKey)
     {
         $read = parent::ManipulateArchive($this->list, 'r');
         if (!isset($vKey) || $vKey === '') {
-            $key = self::nextList($read);
-            $vKey = $key;
+            $vKey = self::nextList($read);
         }
         if (isset($vKey)) {
             return array('date'=>$read[$vKey]['Data'],'key'=>$vKey);
@@ -161,8 +160,7 @@ class Action extends Helper
                 return $key;
             }
         }
-
-        return $key;
+        return null;
     }
 
     private function compareDate($now, $date)
