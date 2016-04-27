@@ -42,13 +42,13 @@ class Helper
         }
 
         fclose($list);
-        return !empty($read) ? $read : [];
+        return !empty($read) ? $read : array();
     }
 
     private function createArchive($archive)
     {
         $arq = fopen($archive, 'x+');
-        fwrite($arq, json_encode([]));
+        fwrite($arq, json_encode(array()));
         fclose($arq);
     }
 

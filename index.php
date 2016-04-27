@@ -57,6 +57,7 @@
                                             $list = new Action;
                                             $itens = new Item;
                                             $item = $itens->loadItens();
+
                                             foreach ($item as $value) {
                                                 $select = '';
                                                 if ($item == $value['Item']) {

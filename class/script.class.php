@@ -8,11 +8,10 @@ require_once 'item.class.php';
 */
 class Script extends Helper
 {
-
     private $lista = array();
     private $archives = array(
-                            'lista' => 'archives/arquivo.list'
-                        );
+        'lista' => 'archives/arquivo.list'
+    );
 
     public function __construct()
     {
