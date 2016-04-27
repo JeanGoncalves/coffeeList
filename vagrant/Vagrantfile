@@ -1,32 +1,29 @@
+# -*- mode: ruby -*-
+
+dir = File.dirname(File.expand_path(__FILE__))
+
 require 'yaml'
+require "#{dir}/puphpet/ruby/deep_merge.rb"
+require "#{dir}/puphpet/ruby/to_bool.rb"
+require "#{dir}/puphpet/ruby/puppet.rb"
 
-configuration = YAML.load_file('config.yaml')
+configValues = YAML.load_file("#{dir}/puphpet/config.yaml")
 
-VAGRANTFILE_API_VERSION = "2"
+provider = ENV['VAGRANT_DEFAULT_PROVIDER'] ? ENV['VAGRANT_DEFAULT_PROVIDER'] : 'local'
+if File.file?("#{dir}/puphpet/config-#{provider}.yaml")
+  custom = YAML.load_file("#{dir}/puphpet/config-#{provider}.yaml")
+  configValues.deep_merge!(custom)
+end
 
-Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-    config.vm.box = configuration["box"]
-    config.vm.hostname = configuration["hostname"]
+if File.file?("#{dir}/puphpet/config-custom.yaml")
+  custom = YAML.load_file("#{dir}/puphpet/config-custom.yaml")
+  configValues.deep_merge!(custom)
+end
 
-    config.vm.synced_folder configuration["projects-folder"], "/www"
-    config.vm.synced_folder "./", "/temp"
-    config.vm.network :private_network, ip: configuration["ip"]
-    config.vm.network "forwarded_port", guest: 80, host: 8080
-    config.vm.network "forwarded_port", guest: 8989, host: 8989
+data = configValues['vagrantfile']
 
-    config.vm.provider configuration["provider"] do |vb|
-        vb.name = configuration["name"]
-        vb.memory = configuration["ram"]
-        vb.cpus = configuration["cpus"]
-        vb.gui = configuration["gui"]
-    end
+Vagrant.require_version '>= 1.8.1'
 
-    config.vm.provision :shell, :path => "scripts/init.sh"
-    config.vm.provision :shell, :path => "scripts/system_packages.sh"
-    config.vm.provision :shell, :path => "scripts/nginx.sh"
-    config.vm.provision :shell, :path => "scripts/php.sh"
-    config.vm.provision :shell, :path => "scripts/mysql.sh"
-    config.vm.provision :shell, :path => "scripts/git.sh"
-    config.vm.provision :shell, :path => "scripts/envvars.sh"
-    config.vm.provision :shell, :path => "scripts/postinstall.sh"
+Vagrant.configure('2') do |config|
+  eval File.read("#{dir}/puphpet/vagrant/Vagrantfile-#{data['target']}")
 end
