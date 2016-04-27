@@ -52,10 +52,10 @@ include_once 'class/menu.class.php';
                         foreach ($list as $key => $value) { ?>
                             <tr>
                                 <td>
-                                    <a href="index.php?key="<?= $value['key'] ?>><?= $value['data'] ?></a>
+                                    <a href="index.php?key=<?= $value['key']; ?>"><?= $value['data'] ?></a>
                                 </td>
                                 <td>
-                                    <a href="index.php?key="<?= $value['key'] ?>><?= $value['qtd'] ?></a>
+                                    <a href="index.php?key=<?= $value['key']; ?>"><?= $value['qtd'] ?></a>
                                 </td>
                                 <td>
                                     <form action="action/action.list.php" method="POST">

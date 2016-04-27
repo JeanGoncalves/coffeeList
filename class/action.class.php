@@ -72,7 +72,7 @@ class Action extends Helper
     public function getDate($vKey)
     {
         $read = parent::ManipulateArchive($this->list, 'r');
-        if (!isset($vKey)) {
+        if (!isset($vKey) || $vKey === '') {
             $key = self::nextList($read);
             $vKey = $key;
         }
@@ -81,6 +81,19 @@ class Action extends Helper
         }
         return false;
     }
+
+    /*public function getDate( $vKey )
+    {
+        $read = parent::ManipulateArchive($this->list,'r');
+        if( isset( $vKey ) ) {
+            $key = $vKey;
+        }
+        if (isset($key)) {
+            $key = self::nextList( $read, $key );
+            return array('date'=>$read[$vKey]['Data'],'key'=>$key);
+        }
+        return false;
+    }*/
 
     public function editList($vKey, $obj)
     {
@@ -148,7 +161,8 @@ class Action extends Helper
                 return $key;
             }
         }
-        return 0;
+
+        return $key;
     }
 
     private function compareDate($now, $date)
