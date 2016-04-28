@@ -1,0 +1,5 @@
+# Habilitar o PHP 5.5
+AddHandler application/x-httpd-php55 .php
+<IfModule mod_suphp.c>
+suPHP_ConfigPath /opt/php55/lib
+</IfModule>
