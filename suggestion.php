@@ -35,7 +35,7 @@ $access = $_GET['access'];
                             <div class="two fields">
                                 <div class="field">
                                     <label>Título</label>
-                                    <input name="nome" class="validate" data-error="Insira um título para sugestão." placeholder="Insira seu nome" type="text">
+                                    <input name="nome" class="validate" data-error="Insira um título para sugestão." placeholder="Insira um título" type="text">
                                 </div>
                             </div>
                             <div class="field">
