@@ -21,7 +21,7 @@ class Sugestao extends Helper
     public function addSugestao($titulo, $descricao, $nome)
     {
         $sugestao = parent::ManipulateArchive($this->arq, 'r');
-        array_push($sugestao, array('data'=>date('d/m/Y G:i:s'), 'descricao'=>nl2br(strip_tags($descricao)), 'nome'=>$nome, 'curtida'=>0));
+        array_push($sugestao, array('data'=>date('d/m/Y G:i:s'), 'descricao'=>nl2br(strip_tags($descricao)), 'nome'=>$nome, 'curtida'=>0, 'cncluido' => false));
         $sugestao = json_encode($sugestao, JSON_UNESCAPED_SLASHES);
         parent::ManipulateArchive($this->arq, 'w', $sugestao);
 
@@ -50,6 +50,16 @@ class Sugestao extends Helper
         $sugestao = parent::ManipulateArchive($this->arq, 'r');
         $like = $sugestao[$vKey]['curtida'];
         $sugestao[$vKey]['curtida'] = $like+1;
+        $sugestao = json_encode($sugestao, JSON_UNESCAPED_SLASHES);
+        parent::ManipulateArchive($this->arq, 'w', $sugestao);
+
+        header('location:'.$this->urlItem);
+    }
+
+    public function conclusionSugestao($vKey)
+    {
+        $sugestao = parent::ManipulateArchive($this->arq, 'r');
+        $sugestao[$vKey]['concluido'] = true;
         $sugestao = json_encode($sugestao, JSON_UNESCAPED_SLASHES);
         parent::ManipulateArchive($this->arq, 'w', $sugestao);
 

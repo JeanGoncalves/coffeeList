@@ -1,6 +1,9 @@
 <?php
 include_once 'class/header.class.php';
 include_once 'class/menu.class.php';
+
+$access = $_GET['access'];
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -52,15 +55,31 @@ include_once 'class/menu.class.php';
                                             <?= $value['curtida'].' '.$people ?>
                                         </div>
                                     </div>
+                                    <?php if (isset($value['concluido']) && $value['concluido']) { ?>
+                                        <a class="ui green tag label">Sugestão Realizada</a>
+                                    <?php } ?>
                                     <div class="text"><?= $value['descricao'] ?></div>
                                     <div class="actions buttons">
-                                        <form action="action/action.suggestion.php" method="POST">
-                                            <input type="hidden" name="key" value="<?= $key ?>">
-                                            <input type="hidden" name="tipo" value="like">
-                                            <button class="ui basic mini button">
-                                            <a class="like">Like</a>
-                                            </button>
-                                        </form>
+                                        <?php if (!isset($value['concluido']) || $value['concluido'] === false) { ?>
+                                            <form action="action/action.suggestion.php" method="POST">
+                                                <input type="hidden" name="key" value="<?= $key ?>">
+                                                <input type="hidden" name="tipo" value="like">
+                                                <button class="ui inverted blue mini button">
+                                                    <a class="like">Like</a>
+                                                </button>
+                                            </form>
+                                        <?php } ?>
+
+                                        <?php if ((!isset($value['concluido']) || $value['concluido'] === false) && $access === '8020') { ?>
+                                            <form action="action/action.suggestion.php" method="POST">
+                                                <input type="hidden" name="key" value="<?= $key ?>">
+                                                <input type="hidden" name="tipo" value="conclusion">
+
+                                                    <button class="ui inverted green mini button">
+                                                        <a class="conclusion">Concluído</a>
+                                                    </button>
+                                            </form>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>

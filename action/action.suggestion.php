@@ -18,5 +18,9 @@ if ($_POST) {
         $key = $_POST['key'];
 
         $sugestao->likeSugestao($key);
+    } elseif ($_POST['tipo'] == 'conclusion') {
+        $key = $_POST['key'];
+
+        $sugestao->conclusionSugestao($key);
     }
 }
