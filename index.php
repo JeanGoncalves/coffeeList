@@ -2,6 +2,7 @@
     include_once 'class/action.class.php';
     include_once 'class/header.class.php';
     include_once 'class/menu.class.php';
+    include_once 'helpers/helper.php';
     $key = null;
     if (isset($_GET['key'])) {
         $key = $_GET['key'];
@@ -14,6 +15,12 @@
     $return = $action->getDate($key);
     $date = $return['date'];
     $key = $return['key'];
+
+    $ordener = array(
+        'order' => $_GET['order'],
+        'type' => $_GET['type']
+    );
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -111,14 +118,34 @@
                 <table class="ui blue striped table">
                     <thead>
                         <tr>
-                            <th class="six wide">Nome</th>
-                            <th class="ten wide">Ítem</th>
+                            <th class="six wide">
+                                <i 
+                                    data-ordener
+                                    data-type="Nome"
+                                    data-order="<?= ($ordener['type'] === 'Nome') ? ($ordener['order'] === 'ASC') ? 'DESC' : 'ASC' : 'ASC' ?>"
+                                    class="long arrow icon link <?= ($ordener['type'] === 'Nome') ? ($ordener['order'] === 'ASC') ? 'blue up' : 'blue down' : 'up disabled' ?>"
+                                ></i>
+                                <span>Nome</span>
+                            </th>
+                            <th class="ten wide">
+                                <i 
+                                    data-ordener
+                                    data-type="Item"
+                                    data-order="<?= ($ordener['type'] === 'Item') ? ($ordener['order'] === 'ASC') ? 'DESC' : 'ASC' : 'ASC' ?>"
+                                    class="long arrow icon link <?= ($ordener['type'] === 'Item') ? ($ordener['order'] === 'ASC') ? 'blue up' : 'blue down' : 'up disabled' ?>"
+                                ></i>
+                                <span>Ítem</span>
+                            </th>
                             <th class="two wide"></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                         $list = $action->loadList($key);
+                        if ($ordener['type'] !== null && $ordener['order'] !== null) {
+                            $list = Helper_php::array_sort($list, $ordener['type'], 'SORT_'.$ordener['order']);
+                        }
+
                         foreach ($list as $reg => $value) { ?>
                             <tr>
                                 <td>

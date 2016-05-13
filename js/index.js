@@ -1,17 +1,6 @@
 $(document).ready(function() {
-    $('.ui .dropdown').dropdown({
-        useLabels: true,
-        onChange: function(value, text, $selectedItem) {
-            var item = $selectedItem[0];
-            $("#componentQtd").removeClass('disabled');
-            $(".inputQtd").prop('disabled', false);
-            $('#labelQtd .label').html(item.id);
-            $('#labelQtd .type').val(item.id);
-            $('#inputQtd').prop('min', $(item).data('min')).val($(item).data('min'));
-            $('#inputQtd').focus();
-            $('#notificationMessage').addClass('hidden');
-        }
-    });
+    
+    listener();
 
 	/*$('#inputQtd').focusout(function() {
 		vItem = $('#item').val();
@@ -34,6 +23,41 @@ $(document).ready(function() {
     		} else $('#notificationMessage').addClass('hidden');
     	},'json');
 	});*/
-
-
 });
+
+var listener = function() {
+    $('.ui .dropdown').dropdown({
+        useLabels: true,
+        onChange: function(value, text, $selectedItem) {
+            var item = $selectedItem[0];
+            $("#componentQtd").removeClass('disabled');
+            $(".inputQtd").prop('disabled', false);
+            $('#labelQtd .label').html(item.id);
+            $('#labelQtd .type').val(item.id);
+            $('#inputQtd').prop('min', $(item).data('min')).val($(item).data('min'));
+            $('#inputQtd').focus();
+            $('#notificationMessage').addClass('hidden');
+        }
+    });
+
+    $('[data-ordener]').on('click', function() {
+        var type = $(this).data('type');
+        var order = $(this).data('order');
+
+        var search = removeParamSearch();
+        window.location.search = search + '&type='+type+'&order='+order;
+    });
+};
+
+var removeParamSearch = function() {
+    var search = window.location.search;
+
+    if (search.indexOf('&order') !== -1) {
+        search = search.slice(0, search.indexOf('&order'));
+    }
+    if (search.indexOf('&type') !== -1) {
+        search = search.slice(0, search.indexOf('&type'));
+    }
+
+    return search;
+};
