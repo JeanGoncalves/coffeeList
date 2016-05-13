@@ -19,6 +19,9 @@ class Header
         if ($type == 'Início') {
             self::getInicio();
         }
+        if ($type == 'Sugestão') {
+            self::getSuggestion();
+        }
     }
 
     private function setTitle($title)
@@ -61,6 +64,11 @@ class Header
     private function getInicio()
     {
         echo '<script type="text/javascript" src="js/index.js"></script>';
+    }
+
+    private function getSuggestion()
+    {
+        echo '<script type="text/javascript" src="js/suggestion.js"></script>';
     }
 
     private function getStyle()
